@@ -1,0 +1,21 @@
+{
+    "name": "ausce/gamc",
+    "autoload": {
+        "psr-4": {
+            "Gamc\\": "App/",
+            "Gamc\\Config\\": "App/Config",
+            "Gamc\\Controller\\": "App/controllers",
+            "Gamc\\Models\\": "App/Models",
+            "Gamc\\Routes\\": "Routes/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Auscence KANHONOU",
+            "email": "auscencek@gmail.com"
+        }
+    ],
+    "require": {
+        "pecee/simple-router": "4.3.7.2"
+    }
+}
