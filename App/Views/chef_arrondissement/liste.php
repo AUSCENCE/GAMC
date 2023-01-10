@@ -35,12 +35,18 @@ use function Gamc\Config\url;
             <main>             
                 <div class=" content">
                      <div class="col-6"><h3>Listes des arrondissements</h3></div>
-                     <?php if (isset($_SESSION['error'])) { ?>
-                           <div class="error"><?= $_SESSION['error'] ?></div>
+                     <?php if (isset($_SESSION['error']) && $_SESSION['error'] != "1") { ?>
+                        <div id="error">
+                            <div  class="error"><?= $_SESSION['error'] ?> <span class="closes" onclick="fermererror()">&times;</span></div>
+                        </div>
+                           <?php $_SESSION['error'] = "1" ?>
                     <?php }?>
-                    <?php if (isset($_SESSION['success'])) { ?>
-                           <div class="success"><?= $_SESSION['success'] ?></div>
-                    <?php }?>                      
+                    <?php if (isset($_SESSION['success']) && $_SESSION['success'] != "1") { ?>
+                        <div id="success">
+                           <div class="success"><?= $_SESSION['success'] ?><span class="closes" onclick="fermersuccess()">&times;</span></div>
+                        </div>
+                           <?php $_SESSION['success'] = "1" ?>
+                    <?php }?>                     
                     <div class="right-title"> <button id="myBtn1" class="btn-primary">Ajouter</button></div>    
                     <div class="table-center"> 
                         <table id="myTable">
@@ -115,7 +121,7 @@ use function Gamc\Config\url;
                                 <span class="close">&times;</span>
                                 <h3>Suppression</h3>                                
                                 <form id="formdel" action="<?= url('arrondissement.delete'); ?>" method="post">
-                                    <input type="hidden" name="_method" value="POST" />
+                                    <input type="hidden" name="_method" value="DELETE" />
                                     <input  id="id" hidden class="form-control" type="number" name="id" value="" required>
                                     <div class="group-form">
                                         <label class="form-control red" for="libelle">Voulez-vous vraiment Supprimer cette ligne <br> <small>Cette action est irréversible</small> </label>
@@ -130,6 +136,7 @@ use function Gamc\Config\url;
             </main>            
         </div>        
         <script src="<?php View::asset('Js/modal.js') ?>"></script>
+        <script src="<?php View::asset('Js/Alerte.js') ?>"></script>
         
         <script src="<?php View::asset('Js/pagination.js') ?>"></script>
     </body>
