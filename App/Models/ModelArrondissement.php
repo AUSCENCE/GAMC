@@ -55,16 +55,27 @@ class ModelArrondissement extends arrondissementManager
     {
         try {
             
-            $query =parent::getDb()->prepare("UPDATE arrondissement SET  libelle = :libelle  WHERE :id "); 
+            $query =parent::getDb()->prepare("UPDATE arrondissement SET  libelle = :libelle  WHERE id = :id "); 
             $query->bindValue(':id', $this->id);
             $query->bindValue(':libelle', $this->libelle);
             $query->execute();
-            var_dump(  $query);
-            die;
+           
         } catch (\PDOException $e) {
 
             echo $e->getMessage();
         }
+    }
+
+    public function delete() {
+          
+        // préparation de la requête de suppression
+        $query =parent::getDb()->prepare('DELETE FROM arrondissement WHERE id = :id');
+      
+        // liaison de l'identifiant de l'objet à la requête
+        $query->bindValue(':id', $this->id);
+      
+        // exécution de la requête
+        $query->execute();
     }
    
 }

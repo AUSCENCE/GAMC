@@ -1,11 +1,11 @@
 <?php 
 namespace Gamc\Models;
 
-use Gamc\Config\Db;
+use Gamc\Config\DB;
 use PDO;
 use PDOException;
 
- class arrondissementManager extends Db
+ class arrondissementManager extends DB
  {
 
     
@@ -37,6 +37,24 @@ use PDOException;
 
       } catch (PDOException $e) {
           echo $e->getMessage("<strong>Error Fatal SQL :</strong> Veuillez Contacter le service Informatique.");   
+      }
+  
+      
+    }
+    public static function is_exit($libelle)
+    {
+      try {
+
+        $query = parent::getDb()->prepare("SELECT * FROM arrondissement WHERE  libelle  = :libelle");
+        $query->bindValue(":libelle", $libelle);
+        $query->execute();
+        $arrondissement = $query->fetch(PDO::FETCH_ASSOC);
+        
+        $arrondissement == (true) ?: $arrondissement = null ;
+        return $arrondissement;
+
+      } catch (PDOException $e) {
+          echo ("<strong>Error Fatal SQL :</strong> Veuillez Contacter le service Informatique.");   
       }
   
       

@@ -65,10 +65,11 @@ class ModelPersonne extends PersonneManager
     }
 
     // méthode pour enregistrer l'acte de naissance dans la base de données
-    public function enregistrer() {
+    public function save() {
        
         // préparation de la requête d'insertion
-        $query =parent::getDb()->prepare('INSERT INTO actesnaissance (nom, prenom, datenaissance, codeQR) VALUES (:nom, :prenom, :datenaissance, :codeQR)');
+        $query =parent::getDb()->prepare('INSERT INTO personne nom, prenom, datenaissance, codeQR
+        VALUES (:nom, :prenom, :datenaissance, :codeQR)');
     
         // liaison des valeurs de l'objet à la requête
         $query->bindValue(':nom', $this->nom);
@@ -79,11 +80,12 @@ class ModelPersonne extends PersonneManager
         // exécution de la requête
         $query->execute();
     }
-
-    public function modifier() {
+    
+    // méthode pour modification l'acte de naissance dans la base de données
+    public function update() {
               
         // préparation de la requête de mise à jour
-        $query =parent::getDb()->prepare('UPDATE actesnaissance 
+        $query =parent::getDb()->prepare('UPDATE personne 
         SET nom = :nom, prenom = :prenom, datenaissance = :datenaissance, codeQR = :codeQR 
         WHERE id = :id');
       
@@ -98,11 +100,11 @@ class ModelPersonne extends PersonneManager
         $query->execute();
     }
 
-    public function supprimer() {
-     
-      
+    // méthode pour suppression l'acte de naissance dans la base de données
+    public function delete() {
+          
         // préparation de la requête de suppression
-        $query =parent::getDb()->prepare('DELETE FROM actesnaissance WHERE id = :id');
+        $query =parent::getDb()->prepare('DELETE FROM personne WHERE id = :id');
       
         // liaison de l'identifiant de l'objet à la requête
         $query->bindValue(':id', $this->id);

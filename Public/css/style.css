@@ -63,11 +63,12 @@ aside{
     width:23.2%;  
     font-size:20px; 
     color: #fff; 
+    
 }
 
 aside ul{
     list-style-type: none;
-    
+    position: fixed;
 }
 aside ul li{
     line-height: 35px;
@@ -203,7 +204,19 @@ main{
     color: #f73737d0;
     line-height: 25px;
     border: 1px #f73737 solid;
-    width: 100%;
+    background-color: #f7373725;
+    border-radius: 5px;
+    padding: 10px;
+    width: 97%;
+}
+.success{
+    color: #0bd15ed0;
+    line-height: 25px;
+    border: 1px #0bd15ed0 solid;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #0bd15e2c;
+    width: 97%;
 }
 .red{
     color: #f73737d0;
@@ -295,9 +308,20 @@ table {
     font-size: 13px;
     font-weight: bold;
   }
-  
+  .closes {
+    float: right;
+    font-size: 13px;
+    font-weight: bold;
+    margin-right: 10px;
+  }
   .close:hover,
   .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }   
+  .closes:hover,
+  .closes:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;

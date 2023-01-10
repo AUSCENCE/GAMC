@@ -13,7 +13,7 @@ Router::get('/liste', [PersonneController::class,'index'])->name('liste');
 
 
 Router::get('/arrondissement', [arrondisementController::class,'index'])->name('arrondissement.index');
-Router::post('/arrondissement', [arrondisementController::class,'delete'])->name('arrondissement.delete');
+Router::delete('/arrondissement', [arrondisementController::class,'delete'])->name('arrondissement.delete');
 Router::post('/arrondissement', [arrondisementController::class,'store'])->name('arrondissement.store');
 Router::put('/arrondissement', [arrondisementController::class,'update'])->name('arrondissement.update');
 
