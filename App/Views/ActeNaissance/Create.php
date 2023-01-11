@@ -1,192 +1,180 @@
-<?php include_once(dirname(__FILE__).'/../layoutform/hearder.php');?>
-<?php include_once(dirname(__FILE__).'/../layoutform/asider.php');?>
+<?php 
+use Gamc\Config\View;
 
+use function Gamc\Config\url;
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-5">
-            <h1>Acte de Naissance</h1>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <!-- left column -->
-          <div class="col-md-12">
-            <!-- jquery validation -->
-            <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">Etablir L'acte de naissance</small></h3>
-              </div>
-              <!-- /.card-header -->
-              <!-- form start -->
-              <form id="quickForm" method="post" action="">
-                <input type="hidden" name="_method" value="POST" />
-                <div class="card-body">
-                    <div class="row ">                       
-                        <div class="col-5 ml-5 " style="border: 1px black solid; border-radius: 10px; margin: 10px;">                            
-                            <div class="form-group">
-                                <label for="Prenoms">Prénom(s) de l'enfant</label>
-                                <input type="text" name="Prenoms" class="form-control" id="Prenoms" >
-                            </div>
-                            <div class="form-group">
-                                <label for="datenaissance">Date de naissance de l'enfant</label>
-                                <input type="date" name="datenaissance" class="form-control" id="datenaissance">
-                            </div>
-                            <div class="form-group">
-                                <label for="lieunaissance">Lieu de naissance de l'enfant</label>
-                                <input type="text" name="lieunaissance" class="form-control" id="lieunaissance">
-                            </div>
+?>
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href=" <?php View::asset('css/style.css') ?>" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <nav>
+                <img src="<?php View::asset('image/embleme.png') ?>"   alt="">
+                <ul>
+                    <li><a href="">Acte de naissance</a> </li>
+                    <li><a href="">Acte de Deces</a> </li>
+                    <li> <a href="">Acte de Mariage</a> </li>
+                </ul>
+            </nav>
+        </header>
+        
+        <div class="wrapper">
+        <aside>
+                <ul>
+                    <li><a href="<?= url('arrondissement.index'); ?>">Liste des arrondissements</a></li>
+                    <li><a href="<?= url('chefarrondissement.index'); ?>"></a></li>
+                    <li><a href="<?= url('profession.index'); ?>"></a></li>
+                    <li></li>
+                </ul>
+            </aside>
+            <main>             
+                <div class=" content text-center">
+                    
+                    <div class="row">                        
+                        <div class="col-6">
+                            <img src="<?php View::asset('image/codeqr.png') ?>" height="150" width="150" alt="">
                         </div>
-                        <div class="col-5"style="border: 1px black solid; border-radius: 10px; margin: 10px;">                            
-                            <div class="form-group">
-                                <label for="Namepere">Nom et Prénom(s) du Père</label>
-                                <input type="text" name="Namepere" class="form-control" id="Namepere" >
-                            </div>
-                            <div class="form-group">
-                                <label for="datenaispere">Date de naissance du Père</label>
-                                <input type="date" name="datenaispere" class="form-control" id="datenaispere">
-                            </div>                            
-                            <div class="form-group">
-                                <label for="ProfPere">Profession du Père</label>
-                                <input type="text" name="ProfPere" class="form-control" id="ProfPere">
-                            </div>
+                        <div class="col-6">
+                            <h3>REPUBLIQUE DU BENIN</h3>
+                            <div  class="row drapeau"><div class="line-vert"></div><div class="line-jaune"></div><div class="line-rouge"></div></div>
+                            <h4>COMMUNE DE COTONOU</h4>
+                            <span class="titre-acte">ACTE DE NAISSANCE</span>
+                            <h4 class="volet">VOLET N° 1</h4>
+                            <span >(à remettre au déclarant)</span>
                         </div>
-                        <div class="col-5 ml-5"style="border: 1px black solid; border-radius: 10px; margin: 10px;">                            
-                            <div class="form-group">
-                                <label for="Namedecla">Nom et Prénom(s) du Déclarant</label>
-                                <input type="text" name="Namedecla" class="form-control" id="Namedecla" >
-                            </div>
-                            <div class="form-group">
-                                <label for="datedecla">Date de Déclaration</label>
-                                <input type="text" name="datedecla" readonly value="<?php echo(date('d/m/Y')) ?>" class="form-control" id="datedecla">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="interprete">Interprete</label>
-                                <input type="text" name="interprete"  class="form-control" id="interprete">
-                            </div>
-                        </div> 
-                        <div class="col-5" style="border: 1px black solid; border-radius: 10px; margin: 10px;">                            
-                            <div class="form-group">
-                                <label for="Prenomsmere">Nom et Prénom(s) de la Mère</label>
-                                <input type="text" name="Prenomsmere" class="form-control" id="Prenomsmere" >
-                            </div>
-                            <div class="form-group">
-                                <label for="datenaismere">Date de naissance de la Mère</label>
-                                <input type="date" name="datenaismere" class="form-control" id="datenaismere">
-                            </div>
-                            <div class="form-group">
-                                <label for="Profmere">Profession de la Mère</label>
-                                <input type="text" name="Profmere" class="form-control" id="Profmere">
-                            </div>
+                        <div class="col-6">
+                        <img src="<?php View::asset('image/codeqr.png') ?>" height="150" width="150" alt="">
                         </div>
-                        
-                        
                     </div>
-                </div>
-                <!-- /.card-body -->
-                <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-              </form>
-            </div>
-            <!-- /.card -->
-            </div>
-          <!--/.col (left) -->
-          <!-- right column -->
-          <div class="col-md-5">
+                    <div class="content-acte">
+                        <form>
+                                
+                            <p>
+                            Je soussigné (e) :  <b>Abou Brock</b> <br>
+                            Fonction : Chef de l'arrondissement de <b>COTONOU 1</b><br> 
+                            Certifie avoir reçu la déclaration de naissance de : <br>
+                            Prénom(s) de l'enfant : <input class="form-control" id="prenom" type="text" name="prenom" value=""><br>
+                            Sexe : <input class="form-control" type="text" id="sexe" name="sexe" value="">
+                            </p>
+                            <p>                            
+                                <table>
+                                    <tr>
+                                        <td class="line">NOM ET PRENOM</td>
+                                        <td style="border-right: none;"> Père : <input class="form-control" type="number" id="searchP" name="searchP" placeholder="Recherchez le matricule" value=""><a id="btn1" class="btn-primary">+</a><br>Mère :<input class="form-control" id="searchM" placeholder="Recherchez le matricule" type="number" name="searchM" value=""><a id="btn2" class="btn-primary"><b>+</b></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="line bR">AGE</td>
+                                        <td style="border-right: none;"> Père : <span id="agepere"></span><br> Mère : <span id="agemere"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="line">PROFESSION</td>
+                                        <td style="border-right: none;"> Père : <span id="profpere"></span><br> Mère : <span id="profmere"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="line">DOMICILE</td>
+                                        <td style="border-right: none;"> Père : <span id="domicilepere"></span><br> Mère : <span id="domicilemere"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="line">DECLARANT</td>
+                                        <td style="border-right: none;"> <input class="form-control" placeholder="Recherchez le matricule" type="number" name="declarent" value=""><a id="btn3" class="btn-primary">+</a></td>
+                                    </tr>
+                                </table>
+                                Date de naissance : <input class="form-control" type="date" name="declarent" value=""> <br>
+                                Lieu de naissance : <input class="form-control" type="text" name="declarent" value=""><br>
+                                Date de la déclaration : <input class="form-control" type="date" name="declarent" value=""> <br>
+                                <div class="text-center">
+                                    Fait à <b>Cotonou</b> le 12-01-2023
+                                </div><br>
+                                <div class="row">
+                                    <div class="col-3">Déclarant, <br> </div>
+                                    <div class="col-3">Intèprete, <br> </div>
+                                    <div class="col-6">Signature et caché de l'officier de l'Etat Civil <br> </div>
+                                </div>
 
-          </div>
-          <!--/.col (right) -->
-        </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
- <!-- /.content-wrapper -->
- <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.2.0
-    </div>
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-  </footer>
+                            </p>
+                            <div class="text-center">
+                                 <button type="submit" class="btn-success ">Enrégistrer</button>
+                            </div>                          
+                        </form>                     
+                    </div>
+                        <!-- Modal 1 -->
+                        <div id="myModal1" class="modal">
+                            <div class="modal-content" style="text-align: justify;">
+                                <span class="close">&times;</span>
+                                <h4 style="text-align: center;">Enregistrement</h4>
+                                
+                                    <form  action="<?= url('chefarrondissement.store'); ?>" method="post">
+                                        <input type="hidden" name="_method" value="POST" />
+                                        <div class="group-form">
+                                            <label class="form-control" for="libelle"> Personne</label>
+                                            <select style="width: 93.5%;" name="arrondissement" class="form-control" required>
+                                                <option value=""></option>
+                                                <?php foreach ($profession as $key => $val) {?>
+                                                <option value="<? $val['id'] ?> "><? $val['libelle'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div> 
+                                        <div class="group-form">
+                                            <label class="form-control" for="libelle"> Nom</label>
+                                            <input class="form-control" style="width: 93.5%;"type="text" name="Nom" value="" required minlength="3">
+                                        </div>
+                                        <div class="group-form">
+                                            <label class="form-control" for="libelle"> Prenom</label>
+                                            <input class="form-control"style="width: 93.5%;" type="text" name="Prenom" value="" required minlength="3">
+                                        </div>
+                                        <div class="group-form ">
+                                            <label class="form-control " for="libelle"> Date Naissance</label>                                            
+                                            <input class="form-control " type="date" name="datenaisse" value="" required>
+                                        </div>                           
+                                        <button  type="submit" class="btn-success" style="text-align: right;">Enrégistrer</button>
+                                    </form>                           
+                            </div>  
+                        </div>
+                </div>                       
+            </main>            
+        </div>        
+        <script src="<?php View::asset('Js/modal.js') ?>"></script>
+        <script src="<?php View::asset('Js/Alerte.js') ?>"></script>
+        
+        <script src="<?php View::asset('Js/pagination.js') ?>"></script>
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
+        <script>                        
+                // Récupère l'élément du modal 1
+                var modal1 = document.getElementById("myModal1");
+                // Récupère l'élément qui ouvre le modal 1
+                var btn1 = document.getElementById("myBtn1");
 
-<!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- jquery-validation -->
-<script src="../../plugins/jquery-validation/jquery.validate.min.js"></script>
-<script src="../../plugins/jquery-validation/additional-methods.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
+                // Récupère l'élément qui ferme le modal 1
+                var span1 = document.getElementsByClassName("close")[0];
 
-<!-- Page specific script -->
-<script>
-$(function () {
-  $.validator.setDefaults({
-    submitHandler: function () {
-      alert( "Form successful submitted!" );
-    }
-  });
-  $('#quickForm').validate({
-    rules: {
-      email: {
-        required: true,
-        email: true,
-      },
-      password: {
-        required: true,
-        minlength: 5
-      },
-      terms: {
-        required: true
-      },
-    },
-    messages: {
-      email: {
-        required: "Please enter a email address",
-        email: "Please enter a valid email address"
-      },
-      password: {
-        required: "Please provide a password",
-        minlength: "Your password must be at least 5 characters long"
-      },
-      terms: "Please accept our terms"
-    },
-    errorElement: 'span',
-    errorPlacement: function (error, element) {
-      error.addClass('invalid-feedback');
-      element.closest('.form-group').append(error);
-    },
-    highlight: function (element, errorClass, validClass) {
-      $(element).addClass('is-invalid');
-    },
-    unhighlight: function (element, errorClass, validClass) {
-      $(element).removeClass('is-invalid');
-    }
-  });
-});
-</script>
-</body>
+                // Quand l'utilisateur clique sur le bouton 1, ouvre le modal 1
+                document.querySelectorAll("#btn1, #btn2, #btn3").forEach(function(bouton) {
+                bouton.addEventListener("click", function() {
+                    modal1.style.display = "block";
+                   ;
+                });
+            });
+
+             // Quand l'utilisateur clique sur le bouton de fermeture 1, ferme le modal 1
+             span1.onclick = function() {
+             modal1.style.display = "none";
+             }
+
+
+             // Quand l'utilisateur clique n'importe où en dehors du modal 1, ferme le modal 1
+             window.onclick = function(event) {
+             if (event.target == modal1) {
+             modal1.style.display = "none";
+             }
+         }
+                    </script>
+                
+
+    </body>
 </html>
-

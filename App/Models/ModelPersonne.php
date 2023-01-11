@@ -7,6 +7,7 @@ class ModelPersonne extends PersonneManager
     public int $id;
     public string $nom;
     public string $prenom;
+    public string $sexe;
     public string $datenaissance;
     public string $codeQR;
     
@@ -53,6 +54,15 @@ class ModelPersonne extends PersonneManager
     {
         return $this->datenaissance; 
     }
+     /**
+     * getter function
+     *
+     * @return sexe
+     */
+    public function sexe()
+    {
+        return $this->sexe; 
+    }
 
     /**
      * getter function
@@ -68,13 +78,14 @@ class ModelPersonne extends PersonneManager
     public function save() {
        
         // préparation de la requête d'insertion
-        $query =parent::getDb()->prepare('INSERT INTO personne nom, prenom, datenaissance, codeQR
-        VALUES (:nom, :prenom, :datenaissance, :codeQR)');
+        $query =parent::getDb()->prepare('INSERT INTO personne nom, prenom, datenaissance, sexe codeQR
+        VALUES (:nom, :prenom, :datenaissance, :codeQR :sexe)');
     
         // liaison des valeurs de l'objet à la requête
         $query->bindValue(':nom', $this->nom);
         $query->bindValue(':prenom', $this->prenom);
         $query->bindValue(':datenaissance', $this->datenaissance);
+        $query->bindValue(':sexe', $this->sexe);
         $query->bindValue(':codeQR', $this->codeQR);
     
         // exécution de la requête
@@ -86,7 +97,7 @@ class ModelPersonne extends PersonneManager
               
         // préparation de la requête de mise à jour
         $query =parent::getDb()->prepare('UPDATE personne 
-        SET nom = :nom, prenom = :prenom, datenaissance = :datenaissance, codeQR = :codeQR 
+        SET nom = :nom, prenom = :prenom, datenaissance = :datenaissance, codeQR = :codeQR,sexe = :sexe
         WHERE id = :id');
       
         // liaison des valeurs de l'objet à la requête
@@ -94,6 +105,7 @@ class ModelPersonne extends PersonneManager
         $query->bindValue(':nom', $this->nom);
         $query->bindValue(':prenom', $this->prenom);
         $query->bindValue(':datenaissance', $this->datenaissance);
+        $query->bindValue(':sexe', $this->sexe);
         $query->bindValue(':codeQR', $this->codeQR);
       
         // exécution de la requête

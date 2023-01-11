@@ -26,3 +26,4 @@ class NaissanceManager extends DB
     return (isset($Naissance)) ? $Naissance : array();
   }
 }
+  

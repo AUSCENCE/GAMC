@@ -29,6 +29,10 @@ Router::delete('/profession', [ProfessionController::class,'delete'])->name('pro
 Router::post('/profession', [ProfessionController::class,'store'])->name('profession.store');
 Router::put('/profession', [ProfessionController::class,'update'])->name('profession.update');
 
+Router::get('/personne', [PersonneController::class,'index'])->name('personne.index');
+Router::delete('/personne', [PersonneController::class,'delete'])->name('personne.delete');
+Router::post('/personne', [PersonneController::class,'store'])->name('personne.store');
+Router::put('/personne', [PersonneController::class,'update'])->name('personne.update');
 
 Router::get('/naissance', [NaissanceController::class,'index'])->name('naissance.index');
 Router::get('/naissance/{id}', [NaissanceController::class,'show'])->name('naissance.show');

@@ -3,10 +3,11 @@ namespace Gamc\Models;
 
 use DateTime;
 
-class ModelNaissance extends NaissanceManager
+class ModelNaissance extends  NaissanceManager
 {
      public int $id;
      public int $id_titulaire;
+     public string $lieunaissance;
      public int $id_pere;
      public int $id_mere;
      public int $id_declarant;
@@ -72,8 +73,11 @@ class ModelNaissance extends NaissanceManager
     public function codeqr()
     {
         return $this->codeqr;
-    }
-
+    } 
+    public function lieunaissance()
+    {
+        return $this->lieunaissance;
+    } 
     /**
      * Undocumented function
      *
@@ -111,8 +115,8 @@ class ModelNaissance extends NaissanceManager
        
         // préparation de la requête d'insertion
         $query =parent::getDb()->prepare('INSERT INTO actenaissance 
-        id_titulaire, id_pere, id_mere, id_declarant,id_arrondissement,datedeclaration,codeqr,id_professionpere,id_professionmere
-        VALUES  :id_titulaire, :id_pere, :id_mere, :id_declarant, :id_arrondissement, :datedeclaration, :codeqr, :id_professionpere, :id_professionmere');
+        id_titulaire, id_pere, id_mere, id_declarant,id_arrondissement,lieunaissance,datedeclaration,codeqr,id_professionpere,id_professionmere
+        VALUES  :id_titulaire, :id_pere, :id_mere, :id_declarant, :id_arrondissement, :lieunaissance, :datedeclaration, :codeqr, :id_professionpere, :id_professionmere');
     
         // liaison des valeurs de l'objet à la requête
         $query->bindValue(':id_titulaire', $this->id_titulaire);
@@ -122,6 +126,7 @@ class ModelNaissance extends NaissanceManager
         $query->bindValue(':id_arrondissement', $this->id_arrondissement);
         $query->bindValue(':datedeclaration', $this->datedeclaration);
         $query->bindValue(':codeqr', $this->codeqr);
+        $query->bindValue(':lieunaissance', $this->lieunaissance);
         $query->bindValue(':id_professionpere', $this->id_professionpere);
         $query->bindValue(':id_professionmere', $this->id_professionmere);
         
@@ -141,6 +146,7 @@ class ModelNaissance extends NaissanceManager
             id_arrondissement = :id_arrondissement,
             datedeclaration = :datedeclaration, 
             codeqr = :codeqr, 
+            lieunaissance = :lieunaissance, 
             id_professionpere = :id_professionpere,
             id_professionmere = :id_professionmere
 
@@ -154,6 +160,7 @@ class ModelNaissance extends NaissanceManager
         $query->bindValue(':id_arrondissement', $this->id_arrondissement);
         $query->bindValue(':datedeclaration', $this->datedeclaration);
         $query->bindValue(':codeqr', $this->codeqr);
+        $query->bindValue(':lieunaissance', $this->lieunaissance);
         $query->bindValue(':id_professionpere', $this->id_professionpere);
         $query->bindValue(':id_professionmere', $this->id_professionmere);
       
