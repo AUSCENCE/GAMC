@@ -329,7 +329,12 @@ table {
     
 
 
-
+  select {
+    line-height: 20px;
+    margin: 7px;
+    border: 1 #293a4e solid;
+    border-radius: 5px;
+}
 
 
 

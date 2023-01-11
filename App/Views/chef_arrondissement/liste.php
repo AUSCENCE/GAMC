@@ -34,7 +34,7 @@ use function Gamc\Config\url;
             </aside>
             <main>             
                 <div class=" content">
-                     <div class="col-6"><h3>Listes des arrondissements</h3></div>
+                     <div class="col-6"><h3>Listes des chefs d'arrondissement</h3></div>
                      <?php if (isset($_SESSION['error']) && $_SESSION['error'] != "1") { ?>
                         <div id="error">
                             <div  class="error"><?= $_SESSION['error'] ?> <span class="closes" onclick="fermererror()">&times;</span></div>
@@ -53,15 +53,23 @@ use function Gamc\Config\url;
                             <tr class="title">
                                 <th>N°</th>
                                 <th>Arrondissement</th>                                
+                                <th>Nom</th>                                
+                                <th>Prénom</th>                                
+                                <th>Année Début</th>                                
+                                <th>Année Fin</th>                                
                                 <th>Actions</th>                                
                             </tr>
                             <tbody>
                                 <?php 
-                                    foreach ($arrondissements as $key => $value) {
+                                    foreach ($chefarrondissements as $key => $value) {
                                         echo 
                                         '<tr>'. 
                                             '<td>'.$value["id"].'</td>'.
                                             '<td>'.$value["libelle"].'</td>'.
+                                            '<td>'.$value["nom"].'</td>'.
+                                            '<td>'.$value["prenom"].'</td>'.
+                                            '<td>'.$value["anneedebut"].'</td>'.
+                                            '<td>'.$value["anneefin"].'</td>'.
                                             '<td>'.
                                                  '<button class="edit-button">Modifier</button>'.
                                                  '<button class="delete-button">Supprimer</button>'.
@@ -81,35 +89,67 @@ use function Gamc\Config\url;
                    
                         <!-- Modal 1 -->
                         <div id="myModal1" class="modal">
-                            <div class="modal-content">
+                            <div class="modal-content" style="text-align: justify;">
                                 <span class="close">&times;</span>
-                                <h4>Enregistrement</h4>
+                                <h4 style="text-align: center;">Enregistrement</h4>
                                 
-                                    <form  action="<?= url('arrondissement.store'); ?>" method="post">
+                                    <form  action="<?= url('chefarrondissement.store'); ?>" method="post">
                                     <input type="hidden" name="_method" value="POST" />
                                         <div class="group-form">
-                                            <label class="form-control" for="libelle"> Libelle</label>
-                                            <input class="form-control" type="text" name="libelle" value="" required minlength="3">
-                                        </div>                            
-                                        <button type="submit" class="btn-success">Enrégistrer</button>
-                                    </form> 
-                               
-                            
-                            </div>
+                                            <label class="form-control" for="libelle"> Arrondissement</label>
+                                            <select style="width: 93.5%;" name="arrondissement" class="form-control" required>
+                                                <option value=""></option>
+                                                <?php foreach ($arrondissements as $key => $val) {?>
+                                                <option value="<?= $val['id'] ?> "><?= $val['libelle'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div> 
+                                        <div class="group-form">
+                                            <label class="form-control" for="libelle"> Nom</label>
+                                            <input class="form-control" style="width: 93.5%;"type="text" name="Nom" value="" required minlength="3">
+                                        </div>
+                                        <div class="group-form">
+                                            <label class="form-control" for="libelle"> Prenom</label>
+                                            <input class="form-control"style="width: 93.5%;" type="text" name="Prenom" value="" required minlength="3">
+                                        </div>
+                                        <div class="group-form row">
+                                            <label class="form-control " for="libelle"> Mandat</label>                                            
+                                            <input class="form-control col-6" type="number" name="anneedebut" value=" <?php echo date("Y")?>" required min=<?php echo date("Y")?> minlength="4" maxlength="4">
+                                            <input class="form-control col-6" type="number" name="anneefin" value="" required minlength="4" maxlength="4" min = <?php echo date("Y")?>>
+                                        </div>                           
+                                        <button  type="submit" class="btn-success" style="text-align: right;">Enrégistrer</button>
+                                    </form>                           
+                            </div>  
                         </div>
 
                         <!-- Modal Update -->
                         <div id="modal-update" class="modal">
-                            <div class="modal-content">
+                            <div class="modal-content"style="text-align: justify;">
                                 <span class="close">&times;</span>      
-                                <h4>Modification</h4>                                
-                                <form id="formId" action="<?= url('arrondissement.update'); ?>" method="POST">
-                                    <input type="hidden" name="_method" value="PUT" />
-                                    <input  id="id" hidden class="form-control" type="number" name="id" value="" required>
-                                    <div class="group-form">
-                                        <label class="form-control" for="libelle"> Libelle</label>
-                                        <input id="libelle" class="form-control" type="text" name="libelle" value="" required minlength="3">
-                                    </div>                            
+                                <h4 style="text-align: center;">Modification</h4>                                
+                                <form id="formId" action="<?= url('chefarrondissement.update') ?>" method="POST">
+                                        <input type="hidden" name="_method" value="PUT" />
+                                        <input  id="id" hidden class="form-control" type="number" name="id" value="" required>
+                                        <input  id="id_arrond" hidden class="form-control" type="number" name="id_arrond" value="" required>
+                                        <div class="group-form">
+                                            <label class="form-control" for="libelle"> Arrondissement</label>
+                                            <input id="arrondissement" class="form-control" style="width: 93.5%;"  readonly name="arrondissement" value="">
+                                            
+                                        </div> 
+                                        <div class="group-form">
+                                            <label class="form-control" for="libelle"> Nom</label>
+                                            <input id="nom" class="form-control" style="width: 93.5%;"type="text" name="Nom" value="" required minlength="3">
+                                        </div>
+                                        <div class="group-form">
+                                            <label class="form-control" for="libelle"> Prenom</label>
+                                            <input id ="prenom" class="form-control"style="width: 93.5%;" type="text" name="Prenom" value="" required minlength="3">
+                                        </div>
+                                        <div class="group-form row">
+                                            <label class="form-control " for="libelle"> Mandat</label>                                            
+                                            <input id="anneedebut" class="form-control col-6" type="number" name="anneedebut" value="" required readonly minlength="4" maxlength="4">
+                                            <input id="anneefin" class="form-control col-6" type="number" name="anneefin" value="" required min=<?php echo date("Y")?>  minlength="4" maxlength="4">
+                                        </div>                           
+                                                               
                                     <button type="submit" class="btn-success">Enrégistrer</button>
                                 </form>     
                             </div>
@@ -120,24 +160,120 @@ use function Gamc\Config\url;
                             <div class="modal-content">
                                 <span class="close">&times;</span>
                                 <h3>Suppression</h3>                                
-                                <form id="formdel" action="<?= url('arrondissement.delete'); ?>" method="post">
+                                <form id="formdel" action="<?= url('chefarrondissement.delete'); ?>" method="POST">
                                     <input type="hidden" name="_method" value="DELETE" />
-                                    <input  id="id" hidden class="form-control" type="number" name="id" value="" required>
+                                    <input  id="id" hidden class="form-control" type="number" name="id" value="">
                                     <div class="group-form">
-                                        <label class="form-control red" for="libelle">Voulez-vous vraiment Supprimer cette ligne <br> <small>Cette action est irréversible</small> </label>
-                                    
+                                            <label class="form-control red" for="libelle">
+                                                Voulez-vous vraiment Supprimer cette ligne <br> 
+                                                <small>Cette action est irréversible</small> 
+                                            </label>
                                     </div>                            
-                                    <button class="btn-delete ">Annuler</button>
-                                    <button type="submit" class="btn-success">Enrégistrer</button>
+                                    <button class="btn-delete">Annuler</button>
+                                    <button type ="submit" class="btn-success">Supprimer</button>
                                 </form>     
                             </div>
                         </div>
-                        </div>                       
+                    </div>                       
             </main>            
-        </div>        
-        <script src="<?php View::asset('Js/modal.js') ?>"></script>
-        <script src="<?php View::asset('Js/Alerte.js') ?>"></script>
-        
+        </div>
+        <script src="<?php View::asset('Js/Alerte.js') ?>"></script>     
         <script src="<?php View::asset('Js/pagination.js') ?>"></script>
+        <script>
+                        
+            // Récupère l'élément du modal 1
+            var modal1 = document.getElementById("myModal1");
+
+            // Récupère l'élément qui ouvre le modal 1
+            var btn1 = document.getElementById("myBtn1");
+
+            // Récupère l'élément qui ferme le modal 1
+            var span1 = document.getElementsByClassName("close")[0];
+
+            // Quand l'utilisateur clique sur le bouton 1, ouvre le modal 1
+            btn1.onclick = function() {
+            modal1.style.display = "block";
+            }
+
+            // Quand l'utilisateur clique sur le bouton de fermeture 1, ferme le modal 1
+            span1.onclick = function() {
+            modal1.style.display = "none";
+            }
+
+
+            // Quand l'utilisateur clique n'importe où en dehors du modal 1, ferme le modal 1
+            window.onclick = function(event) {
+            if (event.target == modal1) {
+                modal1.style.display = "none";
+            }
+            }
+
+
+            //Modification
+            var select = document.getElementById("arronselete");
+            var modal = document.getElementById("modal-update");
+
+            document.querySelectorAll('.edit-button').forEach(function(button) {
+            button.onclick = function() {
+                modal.style.display = "block";
+
+                    // récupère l'objet row correspondant à la ligne
+                    var row = button.parentNode.parentNode;
+
+                    // remplit le formulaire avec les valeurs de la ligne
+                    document.getElementById("nom").value = row.cells[2].innerHTML;
+                    document.getElementById("prenom").value = row.cells[3].innerHTML;
+                    document.getElementById("anneedebut").value = row.cells[4].innerHTML;
+                    document.getElementById("anneefin").value = row.cells[5].innerHTML;
+                    document.getElementById("arrondissement").value = row.cells[1].innerHTML;
+                    document.getElementById("id").value = row.cells[0].innerHTML;
+            }
+            });
+
+            // ferme la modale lorsque l'utilisateur clique sur le bouton de fermeture
+            document.querySelectorAll('.close')[1].onclick = function() {
+            modal.style.display = "none";
+            }
+
+            // ferme la modale lorsque l'utilisateur clique en dehors de celle-ci
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+
+
+            //Suppression
+
+
+            var modaldel = document.getElementById("modal-delete");
+
+            document.querySelectorAll('.delete-button').forEach(function(button) {
+            button.onclick = function() {
+                modaldel.style.display = "block";
+
+                    // récupère l'objet row correspondant à la ligne
+                    var row = button.parentNode.parentNode;
+
+                    // remplit le formulaire avec les valeurs de la ligne
+                    document.getElementById("id").value = row.cells[0].innerHTML;
+                    
+            }
+            });
+
+            // ferme la modale lorsque l'utilisateur clique sur le bouton de fermeture
+            document.querySelectorAll('.close')[2].onclick = function() {
+            modaldel.style.display = "none";
+            }
+
+            // ferme la modale lorsque l'utilisateur clique en dehors de celle-ci
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modaldel.style.display = "none";
+                }
+            }
+    
+        </script>
+
     </body>
 </html>

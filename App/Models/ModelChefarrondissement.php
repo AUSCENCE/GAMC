@@ -52,8 +52,7 @@ Class ModelChefarrondissement extends ChefarrondissementManager
     {
         try {
 
-            $query =parent::getDb()->prepare("INSERT INTO arrondissement (id,nom,prenom,anneedebut,anneefin,id_arrondissement)  VALUE ( :id, :nom, :prenom, :anneedebut, :anneefin, :id_arrondissement) ");
-            $query->bindValue(':id', $this->id);
+            $query =parent::getDb()->prepare("INSERT INTO chefarrondissement (nom,prenom,anneedebut,anneefin,id_arrondissement)  VALUE (:nom, :prenom, :anneedebut, :anneefin, :id_arrondissement) ");
             $query->bindValue(':nom', $this->nom);
             $query->bindValue(':prenom', $this->prenom);
             $query->bindValue(':anneedebut', $this->anneedebut);
@@ -72,13 +71,20 @@ Class ModelChefarrondissement extends ChefarrondissementManager
     public  function update()
     {
         try {
-            $query = parent::getDb()->prepare("UPDATE arrondissement  SET ( nom = :nom, prenom = :prenom, anneedebut = :anneedebut, anneefin = :anneefin, id_arrondissement = :id_arrondissement) WHERE id = :id ");
+            $query = parent::getDb()->prepare("UPDATE chefarrondissement  
+                SET 
+                    nom = :nom,
+                    prenom = :prenom, 
+                    anneedebut = :anneedebut, 
+                    anneefin = :anneefin 
+                WHERE 
+                    id = :id ");
             $query->bindValue(':id', $this->id);
             $query->bindValue(':nom', $this->nom);
             $query->bindValue(':prenom', $this->prenom);
             $query->bindValue(':anneedebut', $this->anneedebut);
             $query->bindValue(':anneefin', $this->anneefin);
-            $query->bindValue(':id_arrondissement', $this->id_arrondissement);
+         // $query->bindValue(':id_arrondissement', $this->id_arrondissement); , id_arrondissement = :id_arrondissement
             $query->execute();
             $query->fetch(PDO::FETCH_ASSOC);
 
@@ -91,7 +97,7 @@ Class ModelChefarrondissement extends ChefarrondissementManager
     public function delete() {
           
         // préparation de la requête de suppression
-        $query =parent::getDb()->prepare('DELETE FROM actesnaissance WHERE id = :id');
+        $query =parent::getDb()->prepare('DELETE FROM chefarrondissement     WHERE id = :id');
       
         // liaison de l'identifiant de l'objet à la requête
         $query->bindValue(':id', $this->id);
