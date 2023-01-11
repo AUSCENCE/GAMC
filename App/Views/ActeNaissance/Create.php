@@ -74,7 +74,23 @@ use function Gamc\Config\url;
                                     </tr>
                                     <tr>
                                         <td class="line">PROFESSION</td>
-                                        <td style="border-right: none;"> Père : <span id="profpere"></span><br> Mère : <span id="profmere"></span></td>
+                                        <td style="border-right: none;"> Père : 
+                                        <span class="group-form">
+                                            <select name="arrondissement" class="form-control" required>
+                                                <option value=""></option>
+                                                <?php foreach ($professions as $key => $val) {?>
+                                                <option value="<?= $val['id'] ?> "><?= $val['libelle'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </span> <br> Mère : 
+                                        <span class="group-form">
+                                            <select name="arrondissement" class="form-control" required>
+                                                <option value=""></option>
+                                                <?php foreach ($professions as $key => $val) {?>
+                                                <option value="<?= $val['id'] ?> "><?= $val['libelle'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </span> </td>
                                     </tr>
                                     <tr>
                                         <td class="line">DOMICILE</td>
@@ -109,17 +125,8 @@ use function Gamc\Config\url;
                                 <span class="close">&times;</span>
                                 <h4 style="text-align: center;">Enregistrement</h4>
                                 
-                                    <form  action="<?= url('chefarrondissement.store'); ?>" method="post">
+                                    <form  action="<?= url('personne.store'); ?>" method="post">
                                         <input type="hidden" name="_method" value="POST" />
-                                        <div class="group-form">
-                                            <label class="form-control" for="libelle"> Personne</label>
-                                            <select style="width: 93.5%;" name="arrondissement" class="form-control" required>
-                                                <option value=""></option>
-                                                <?php foreach ($profession as $key => $val) {?>
-                                                <option value="<? $val['id'] ?> "><? $val['libelle'] ?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </div> 
                                         <div class="group-form">
                                             <label class="form-control" for="libelle"> Nom</label>
                                             <input class="form-control" style="width: 93.5%;"type="text" name="Nom" value="" required minlength="3">
@@ -128,9 +135,13 @@ use function Gamc\Config\url;
                                             <label class="form-control" for="libelle"> Prenom</label>
                                             <input class="form-control"style="width: 93.5%;" type="text" name="Prenom" value="" required minlength="3">
                                         </div>
+                                        <div class="group-form">
+                                            <label class="form-control" for="libelle"> Sexe</label>
+                                            <input class="form-control"style="width: 93.5%;" type="text" name="sexe" value="" required minlength="3">
+                                        </div>
                                         <div class="group-form ">
                                             <label class="form-control " for="libelle"> Date Naissance</label>                                            
-                                            <input class="form-control " type="date" name="datenaisse" value="" required>
+                                            <input class="form-control " type="date" style="width: 93.5%;" name="datenaisse" value="" required>
                                         </div>                           
                                         <button  type="submit" class="btn-success" style="text-align: right;">Enrégistrer</button>
                                     </form>                           

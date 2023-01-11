@@ -1,6 +1,7 @@
 <?php 
 namespace Gamc\Models;
 
+use PDO;
 
 class ModelPersonne extends PersonneManager
 {
@@ -76,7 +77,7 @@ class ModelPersonne extends PersonneManager
 
     // méthode pour enregistrer l'acte de naissance dans la base de données
     public function save() {
-       
+       try {
         // préparation de la requête d'insertion
         $query =parent::getDb()->prepare('INSERT INTO personne nom, prenom, datenaissance, sexe codeQR
         VALUES (:nom, :prenom, :datenaissance, :codeQR :sexe)');
@@ -90,6 +91,12 @@ class ModelPersonne extends PersonneManager
     
         // exécution de la requête
         $query->execute();
+        $query->fetch(PDO::FETCH_ASSOC);
+        var_dump($query); die;
+
+       } catch (\Throwable $e) {
+        $e->getMessage();
+       }
     }
     
     // méthode pour modification l'acte de naissance dans la base de données

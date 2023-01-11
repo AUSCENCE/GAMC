@@ -4,6 +4,7 @@ use Pecee\Http\Request;
 use Gamc\Config\View;
 use Gamc\Models\ModelNaissance;
 use Gamc\Models\ModelPersonne;
+use Gamc\Models\ModelProfession;
 use Gamc\Models\Naissance;
 
  class NaissanceController extends Controller
@@ -26,11 +27,13 @@ use Gamc\Models\Naissance;
      * @return void
      */
     public function create()
-    {     $personnes = ModelPersonne::all();   
+    {     $personnes = ModelPersonne::all(); 
+          $professions = ModelProfession::all();  
           return View::view('ActeNaissance.Create',
           [
-            "personnes" => $personnes
-        ]);     
+            "personnes" => $personnes,
+            "professions" => $professions
+          ]);     
         
     }
 
