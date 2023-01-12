@@ -50,8 +50,9 @@ use Gamc\Models\Naissance;
      * @param Request $request
      * @return void
      */
-    public function store(Request $request )
+    public function store()
     {        
+      var_dump($_POST);
         $naissance = new ModelNaissance;
         $naissance->id_titulaire = 1;
         $naissance->id_pere = 1;
@@ -61,6 +62,7 @@ use Gamc\Models\Naissance;
         $naissance->id_arrondissement = 1;
         $naissance->id_declarant = 1;
         $naissance->datedeclaration = '2023-01-06 15:20';
+        $naissance->save();
 
     }
 

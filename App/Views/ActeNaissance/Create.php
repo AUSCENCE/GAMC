@@ -53,8 +53,22 @@ use function Gamc\Config\url;
                         </div>
                     </div>
                     <div class="content-acte">
-                        <form>
-                                
+                        <?php if (isset($_SESSION['error']) && $_SESSION['error'] != "1") { ?>
+                            <div id="error">
+                                <div  class="error"><?= $_SESSION['error'] ?> <span class="closes" onclick="fermererror()">&times;</span></div>
+                            </div>
+                           <?php $_SESSION['error'] = "1" ?>
+                        <?php } ?>
+                        <?php if (isset($_SESSION['success']) && $_SESSION['success'] != "1") { ?>
+                            <div id="success">
+                            <div class="success"><span class="closes" onclick="fermersuccess()">&times;</span><?= $_SESSION['success'] ?></div>
+                            </div>
+                            <?php $_SESSION['success'] = "1" ?>
+                        <?php } ?> 
+                        
+                        
+                        <form action="<?=  url('naissance.store'); ?>">
+                        <input type="hidden" name="_method" value="POST" />                                
                             <p>
                             Je soussigné (e) :  <b>Abou Brock</b> <br>
                             Fonction : Chef de l'arrondissement de <b>COTONOU 1</b><br> 
@@ -66,46 +80,72 @@ use function Gamc\Config\url;
                                 <table>
                                     <tr>
                                         <td class="line">NOM ET PRENOM</td>
-                                        <td style="border-right: none;"> Père : <input class="form-control" type="number" id="searchP" name="searchP" placeholder="Recherchez le matricule" value=""><a id="btn1" class="btn-primary">+</a><br>Mère :<input class="form-control" id="searchM" placeholder="Recherchez le matricule" type="number" name="searchM" value=""><a id="btn2" class="btn-primary"><b>+</b></a></td>
+                                        <td style="border-right: none;"> 
+                                            Père : 
+                                                <span id='pere'></span>
+                                                <input class="form-control" type="number" id="searchP" name="searchP" placeholder="Recherchez le matricule" value="">
+                                                <a id="btn1" class="btn-primary">+</a><br>
+                                            Mère : 
+                                                <span id='mere'></span> 
+                                                <input class="form-control" id="searchM" placeholder="Recherchez le matricule" type="number" name="searchM" value="">
+                                                <a id="btn2" class="btn-primary"><b>+</b></a>
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td class="line bR">AGE</td>
-                                        <td style="border-right: none;"> Père : <span id="agepere"></span><br> Mère : <span id="agemere"></span></td>
+                                        <td class="line ">AGE</td>
+                                        <td style="border-right: none;">
+                                            Père : 
+                                                <span id="agepere"></span><br> 
+                                            Mère : 
+                                                <span id="agemere"></span>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td class="line">PROFESSION</td>
-                                        <td style="border-right: none;"> Père : 
-                                        <span class="group-form">
-                                            <select name="arrondissement" class="form-control" required>
-                                                <option value=""></option>
-                                                <?php foreach ($professions as $key => $val) {?>
-                                                <option value="<?= $val['id'] ?> "><?= $val['libelle'] ?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </span> <br> Mère : 
-                                        <span class="group-form">
-                                            <select name="arrondissement" class="form-control" required>
-                                                <option value=""></option>
-                                                <?php foreach ($professions as $key => $val) {?>
-                                                <option value="<?= $val['id'] ?> "><?= $val['libelle'] ?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </span> </td>
+                                        <td style="border-right: none;"> 
+                                            Père : 
+                                            <span class="group-form">
+                                                <select name="profpere" class="form-control" required>
+                                                    <option value=""></option>
+                                                    <?php foreach ($professions as $key => $val) {?>
+                                                    <option value="<?= $val['id'] ?> "><?= $val['libelle'] ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </span> <br> 
+                                            Mère : 
+                                            <span class="group-form">
+                                                <select name="profmere" class="form-control" required>
+                                                    <option value=""></option>
+                                                    <?php foreach ($professions as $key => $val) {?>
+                                                    <option value="<?= $val['id'] ?> "><?= $val['libelle'] ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </span> 
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td class="line">DOMICILE</td>
-                                        <td style="border-right: none;"> Père : <span id="domicilepere"></span><br> Mère : <span id="domicilemere"></span></td>
+                                        <td style="border-right: none;"> 
+                                            Père : 
+                                                <input class="form-control" id="domicilepere" placeholder="Recherchez le matricule" type="text" name="domicilepere" value=""><br> 
+                                            Mère :
+                                                <input class="form-control" id="domicilemere" type="text" name="domicilemere" value=""><br>  
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td class="line">DECLARANT</td>
-                                        <td style="border-right: none;"> <input class="form-control" placeholder="Recherchez le matricule" type="number" name="declarent" value=""><a id="btn3" class="btn-primary">+</a></td>
+                                        <td style="border-right: none;">
+                                            <span id="decl"></span> 
+                                            <input class="form-control" id="declarant" type="number" name="declarant" value="">
+                                            <a id="btn3" class="btn-primary">+</a>
+                                        </td>
                                     </tr>
                                 </table>
-                                Date de naissance : <input class="form-control" type="date" name="declarent" value=""> <br>
+                                Date de naissance : <input class="form-control" type="date" name="declarent" value="" max="<?= date('Y-m-j') ?>"> <br>
                                 Lieu de naissance : <input class="form-control" type="text" name="declarent" value=""><br>
-                                Date de la déclaration : <input class="form-control" type="date" name="declarent" value=""> <br>
+                                Date de la déclaration : <input class="form-control" type="date" name="declarent" max="<?= date('Y-m-j') ?>" value=""> <br>
                                 <div class="text-center">
-                                    Fait à <b>Cotonou</b> le 12-01-2023
+                                    Fait à <b>Cotonou</b> le <?= date('Y-m-j') ?>
                                 </div><br>
                                 <div class="row">
                                     <div class="col-3">Déclarant, <br> </div>
@@ -150,12 +190,13 @@ use function Gamc\Config\url;
                 </div>                       
             </main>            
         </div>        
-        <script src="<?php View::asset('Js/modal.js') ?>"></script>
+        <!-- <script src="<?php View::asset('Js/modal.js') ?>"></script> -->
         <script src="<?php View::asset('Js/Alerte.js') ?>"></script>
         
-        <script src="<?php View::asset('Js/pagination.js') ?>"></script>
-
-        <script>                        
+        <!-- <script src="<?php View::asset('Js/pagination.js') ?>"></script>
+ -->
+        <script> 
+            sessionStorage.setItem("nom", "valeur");                       
                 // Récupère l'élément du modal 1
                 var modal1 = document.getElementById("myModal1");
                 // Récupère l'élément qui ouvre le modal 1
@@ -168,23 +209,73 @@ use function Gamc\Config\url;
                 document.querySelectorAll("#btn1, #btn2, #btn3").forEach(function(bouton) {
                 bouton.addEventListener("click", function() {
                     modal1.style.display = "block";
-                   ;
+                  
+                    });
                 });
-            });
 
-             // Quand l'utilisateur clique sur le bouton de fermeture 1, ferme le modal 1
-             span1.onclick = function() {
-             modal1.style.display = "none";
-             }
+                // Quand l'utilisateur clique sur le bouton de fermeture 1, ferme le modal 1
+                span1.onclick = function() {
+                modal1.style.display = "none";
+                }
 
 
-             // Quand l'utilisateur clique n'importe où en dehors du modal 1, ferme le modal 1
-             window.onclick = function(event) {
-             if (event.target == modal1) {
-             modal1.style.display = "none";
-             }
-         }
-                    </script>
+                // Quand l'utilisateur clique n'importe où en dehors du modal 1, ferme le modal 1
+                window.onclick = function(event) {
+                    if (event.target == modal1) {
+                        modal1.style.display = "none";
+                    }
+                }
+                // Gestion des recherche 
+               const searchP = document.getElementById('searchP'); 
+               const searchM = document.getElementById('searchM'); 
+               const declarant = document.getElementById('declarant'); 
+               const personnes = <?= json_encode($personnes); ?>;
+
+               //pere
+               searchP.onchange = ()=>{
+                    const resultats = personnes.filter(personne => personne.codeqr == searchP.value);
+                    resultats.forEach(personne => {
+                        document.getElementById('pere').innerHTML = personne.nom+' '+personne.prenom+'   ';
+                        let jour = new Date();
+                        let datenais = new Date(personne.datenaissance);                          
+                        document.getElementById('agepere').innerHTML = Math.floor((jour - datenais)/31536000000) +' ans' ;
+                        searchP.value = personne.id;
+                    
+                    });
+                    searchP.style.display ='none';
+                    document.getElementById('btn1').style.display = 'none';
+               } ;  
+               
+               //Mere
+               searchM.onchange = ()=>{
+                    const resultats = personnes.filter(personne => personne.codeqr == searchM.value);
+                    resultats.forEach(personne => {
+                        document.getElementById('mere').innerHTML = personne.nom+' '+personne.prenom+'   ';
+                        let jour = new Date();
+                        let datenais = new Date(personne.datenaissance);                          
+                        document.getElementById('agemere').innerHTML = Math.floor((jour - datenais)/31536000000) +' ans' ;
+                        searchM.value = personne.id;
+                    
+                    });
+                    searchM.style.display ='none';
+                    document.getElementById('btn2').style.display = 'none';
+                    console.log(searchP.value);
+               } ; 
+
+               //declarant
+               declarant.onchange = ()=>{
+                    const resultats = personnes.filter(personne => personne.codeqr == declarant.value);
+                    resultats.forEach(personne => {
+                        document.getElementById('decl').innerHTML = personne.nom+' '+personne.prenom+'   ';
+                        declarant.value = personne.id;
+                    });
+                    declarant.style.display ='none';
+                    document.getElementById('btn3').style.display = 'none';
+                   
+               } ;     
+
+    
+        </script>
                 
 
     </body>
