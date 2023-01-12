@@ -1,10 +1,10 @@
 <?php 
 namespace Gamc\Models;
 
-use Gamc\Config\Db;
+use Gamc\Config\DB;
 use PDOException;
 
-class NaissanceManager extends Db
+class NaissanceManager extends DB
 {
 
     /**
@@ -15,7 +15,7 @@ class NaissanceManager extends Db
   static function all(): array
   {
     try {
-      $traiment = parent::getDb()->prepare("SELECT * FROM actenaissance");
+      $traiment = parent::DB()->prepare("SELECT * FROM actenaissance, personne, profession, ");
       $traiment->execute();
     } catch (PDOException $e) {
         echo $e->getMessage();   
@@ -26,3 +26,4 @@ class NaissanceManager extends Db
     return (isset($Naissance)) ? $Naissance : array();
   }
 }
+  

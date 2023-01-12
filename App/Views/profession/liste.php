@@ -28,8 +28,8 @@ use function Gamc\Config\url;
         <aside>
                 <ul>
                     <li><a href="<?= url('arrondissement.index'); ?>">Liste des arrondissements</a></li>
-                    <li><a href="<?= url('chefarrondissement.index'); ?>"></a></li>
-                    <li><a href="<?= url('profession.index'); ?>"></a></li>
+                    <li><a href="<?= url('chefarrondissement.index'); ?>">Liste des chefs arrondissements</a></li>
+                    <li><a href="<?= url('profession.index'); ?>">Liste des professions</a></li>
                     <li></li>
                 </ul>
             </aside>
@@ -53,12 +53,12 @@ use function Gamc\Config\url;
                         <table id="myTable">
                             <tr class="title">
                                 <th>N°</th>
-                                <th>Arrondissement</th>                                
+                                <th>Prodession</th>                                
                                 <th>Actions</th>                                
                             </tr>
                             <tbody>
                                 <?php 
-                                    foreach ($arrondissements as $key => $value) {
+                                    foreach ($professions as $key => $value) {
                                         echo 
                                         '<tr>'. 
                                             '<td>'.$value["id"].'</td>'.
@@ -86,7 +86,7 @@ use function Gamc\Config\url;
                                 <span class="close">&times;</span>
                                 <h4>Enregistrement</h4>
                                 
-                                    <form  action="<?= url('arrondissement.store'); ?>" method="post">
+                                    <form  action="<?= url('profession.store'); ?>" method="post">
                                     <input type="hidden" name="_method" value="POST" />
                                         <div class="group-form">
                                             <label class="form-control" for="libelle"> Libelle</label>
@@ -104,7 +104,7 @@ use function Gamc\Config\url;
                             <div class="modal-content">
                                 <span class="close">&times;</span>      
                                 <h4>Modification</h4>                                
-                                <form id="formId" action="<?= url('arrondissement.update'); ?>" method="POST">
+                                <form id="formId" action="<?= url('profession.update'); ?>" method="POST">
                                     <input type="hidden" name="_method" value="PUT" />
                                     <input  id="id" hidden class="form-control" type="number" name="id" value="" required>
                                     <div class="group-form">
@@ -121,7 +121,7 @@ use function Gamc\Config\url;
                             <div class="modal-content">
                                 <span class="close">&times;</span>
                                 <h3>Suppression</h3>                                
-                                <form id="formdel" action="<?= url('arrondissement.delete'); ?>" method="post">
+                                <form id="formdel" action="<?= url('profession.delete'); ?>" method="post">
                                     <input type="hidden" name="_method" value="DELETE" />
                                     <input  id="id" hidden class="form-control" type="number" name="id" value="" required>
                                     <div class="group-form">

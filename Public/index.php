@@ -1,5 +1,5 @@
 <?php
-
+  session_start();
 // load composer dependencies
 require '../vendor/autoload.php';
 define('BASE_VIEW_PATH',dirname(__DIR__).DIRECTORY_SEPARATOR. 'App/Views' .DIRECTORY_SEPARATOR);

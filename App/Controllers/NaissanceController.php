@@ -3,6 +3,8 @@
 use Pecee\Http\Request;
 use Gamc\Config\View;
 use Gamc\Models\ModelNaissance;
+use Gamc\Models\ModelPersonne;
+use Gamc\Models\ModelProfession;
 use Gamc\Models\Naissance;
 
  class NaissanceController extends Controller
@@ -12,11 +14,11 @@ use Gamc\Models\Naissance;
      * liste des acte de naissance
      *
      * @return view 
-     */
+     */ 
     public function index()
     {       
         $naissances = ModelNaissance::all();     
-        $view = new View('ActeNaissance.Liste', $naissances);      
+        return  View::view('ActeNaissance.Liste', $naissances);      
     }
 
     /**
@@ -25,8 +27,13 @@ use Gamc\Models\Naissance;
      * @return void
      */
     public function create()
-    {        
-           $view = new View('ActeNaissance.Create');     
+    {     $personnes = ModelPersonne::all(); 
+          $professions = ModelProfession::all();  
+          return View::view('ActeNaissance.Create',
+          [
+            "personnes" => $personnes,
+            "professions" => $professions
+          ]);     
         
     }
 

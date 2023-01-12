@@ -5,7 +5,7 @@ use Gamc\Config\DB;
 use PDO;
 use PDOException;
 
- class arrondissementManager extends DB
+ class ProfessionManager extends DB
  {
 
     
@@ -13,10 +13,10 @@ use PDOException;
     {
       try {
 
-        $query = parent::DB()->prepare("SELECT * FROM arrondissement");
+        $query = parent::DB()->prepare("SELECT * FROM profession");
         $query->execute();
-        $arrondissements = $query->fetchAll(PDO::FETCH_ASSOC);
-        return $arrondissements;
+        $professions = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $professions;
 
       } catch (PDOException $e) {
           echo $e->getMessage();   
@@ -29,11 +29,11 @@ use PDOException;
     {
       try {
 
-        $query = parent::DB()->prepare("SELECT * FROM arrondissement WHERE  id  = :id");
+        $query = parent::DB()->prepare("SELECT * FROM profession WHERE  id  = :id");
         $query->bindValue(":id", $id);
         $query->execute();
-        $arrondissement = $query->fetch(PDO::FETCH_ASSOC);
-        return $arrondissement;
+        $profession = $query->fetch(PDO::FETCH_ASSOC);
+        return $profession;
 
       } catch (PDOException $e) {
           echo $e->getMessage("<strong>Error Fatal SQL :</strong> Veuillez Contacter le service Informatique.");   
@@ -45,13 +45,13 @@ use PDOException;
     {
       try {
 
-        $query = parent::DB()->prepare("SELECT * FROM arrondissement WHERE  libelle  = :libelle");
+        $query = parent::DB()->prepare("SELECT * FROM profession WHERE  libelle  = :libelle");
         $query->bindValue(":libelle", $libelle);
         $query->execute();
-        $arrondissement = $query->fetch(PDO::FETCH_ASSOC);
+        $profession = $query->fetch(PDO::FETCH_ASSOC);
         
-        $arrondissement == (true) ?: $arrondissement = null ;
-        return $arrondissement;
+        $profession == (true) ?: $profession = null ;
+        return $profession;
 
       } catch (PDOException $e) {
           echo ("<strong>Error Fatal SQL :</strong> Veuillez Contacter le service Informatique.");   

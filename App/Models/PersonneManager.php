@@ -5,7 +5,7 @@ use Gamc\Config\DB;
 use PDO;
 use PDOException;
 
- class arrondissementManager extends DB
+ class personneManager extends DB
  {
 
     
@@ -13,10 +13,10 @@ use PDOException;
     {
       try {
 
-        $query = parent::DB()->prepare("SELECT * FROM arrondissement");
+        $query = parent::DB()->prepare("SELECT * FROM personne");
         $query->execute();
-        $arrondissements = $query->fetchAll(PDO::FETCH_ASSOC);
-        return $arrondissements;
+        $personnes = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $personnes;
 
       } catch (PDOException $e) {
           echo $e->getMessage();   
@@ -29,11 +29,11 @@ use PDOException;
     {
       try {
 
-        $query = parent::DB()->prepare("SELECT * FROM arrondissement WHERE  id  = :id");
+        $query = parent::DB()->prepare("SELECT * FROM personne WHERE  id  = :id");
         $query->bindValue(":id", $id);
         $query->execute();
-        $arrondissement = $query->fetch(PDO::FETCH_ASSOC);
-        return $arrondissement;
+        $personne = $query->fetch(PDO::FETCH_ASSOC);
+        return $personne;
 
       } catch (PDOException $e) {
           echo $e->getMessage("<strong>Error Fatal SQL :</strong> Veuillez Contacter le service Informatique.");   
@@ -45,13 +45,13 @@ use PDOException;
     {
       try {
 
-        $query = parent::DB()->prepare("SELECT * FROM arrondissement WHERE  libelle  = :libelle");
+        $query = parent::DB()->prepare("SELECT * FROM personne WHERE  libelle  = :libelle");
         $query->bindValue(":libelle", $libelle);
         $query->execute();
-        $arrondissement = $query->fetch(PDO::FETCH_ASSOC);
+        $personne = $query->fetch(PDO::FETCH_ASSOC);
         
-        $arrondissement == (true) ?: $arrondissement = null ;
-        return $arrondissement;
+        $personne == (true) ?: $personne = null ;
+        return $personne;
 
       } catch (PDOException $e) {
           echo ("<strong>Error Fatal SQL :</strong> Veuillez Contacter le service Informatique.");   

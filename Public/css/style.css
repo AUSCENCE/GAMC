@@ -63,11 +63,12 @@ aside{
     width:23.2%;  
     font-size:20px; 
     color: #fff; 
+    
 }
 
 aside ul{
     list-style-type: none;
-    
+    position: fixed;
 }
 aside ul li{
     line-height: 35px;
@@ -103,6 +104,9 @@ main{
 .row{
     display : flex;
     flex: 1 0 auto;
+}
+.col-12{
+    width: 100%;
 }
 .col-6{
     width: 50%;
@@ -203,8 +207,82 @@ main{
     color: #f73737d0;
     line-height: 25px;
     border: 1px #f73737 solid;
-    width: 100%;
+    background-color: #f7373725;
+    border-radius: 5px;
+    padding: 10px;
+    width: 97%;
 }
+.success{
+    color: #0bd15ed0;
+    line-height: 25px;
+    border: 1px #0bd15ed0 solid;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #0bd15e2c;
+    width: 97%;
+}
+.drapeau{
+    margin-top: -3%;
+}
+.line-vert{
+    line-height: 30px;
+    border:2px #049423 solid;
+    width: 60px;
+    margin-left: 19%;
+}
+.line-jaune{
+    line-height: 30px;
+    border:2px yellow solid;
+    width: 60px;
+   
+}
+.line-rouge{
+    line-height: 30px;
+    border:2px red solid;
+    width: 60px;
+   
+}
+.titre-acte{
+    border: 1px black solid;
+    border-radius: 7px;
+    font-size: 25px;
+    font-weight: 800;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.text-center{ text-align: center;}
+.text-right{ text-align: right;}
+.text-left{ text-align: left;}
+.content-acte{
+    padding-top: 20px;
+    padding-left: 10%;
+    text-justify: auto;
+    text-align: left;
+    line-height: 25px;
+}
+.content-acte table{
+    border: none;
+    width: none;
+}
+/* .content-acte tr td{
+    border: none;
+    
+} */
+.content-acte td  {
+    border-right:1px black solid;
+    border-top: none;
+    border-left: none;
+    border-bottom: none;
+    
+}
+.volet{ 
+    margin-bottom: -3px;
+   
+}
+.line{
+    text-decoration: underline;
+    font-weight: 800;
+  }
 .red{
     color: #f73737d0;
     margin-bottom: 10px;
@@ -221,14 +299,14 @@ main{
 {
     text-align: center;
 }
-table {
+.table-center table {
     border-collapse: collapse;
     width: 100%;
     border: 2px solid #ddd;
     margin-top: 10px;
   }
   
-  th, td {
+  .table-center th, td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
@@ -242,7 +320,7 @@ table {
     text-align: center;
     font-weight: 400;
 }
-  tr:nth-child(even) {
+.table-center tr:nth-child(even) {
     background-color: #f2f2f2;
   }
   
@@ -283,7 +361,7 @@ table {
   .modal-content {
     /* Fond de couleur blanc */
     background-color: #fff;
-    margin: 15% auto;   
+    margin: 10% auto;   
     width: 25%;       
     padding: 20px;
     border: 1px solid #888;
@@ -295,9 +373,20 @@ table {
     font-size: 13px;
     font-weight: bold;
   }
-  
+  .closes {
+    float: right;
+    font-size: 13px;
+    font-weight: bold;
+    margin-right: 10px;
+  }
   .close:hover,
   .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }   
+  .closes:hover,
+  .closes:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
@@ -305,7 +394,12 @@ table {
     
 
 
-
+  select {
+    line-height: 20px;
+    margin: 7px;
+    border: 1 #293a4e solid;
+    border-radius: 5px;
+}
 
 
 

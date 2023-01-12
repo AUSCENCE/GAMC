@@ -4,7 +4,7 @@ namespace Gamc\Config;
 use PDO;
 use PDOException;
 
-class Db 
+class DB 
 {
     private static PDO $db;
     protected const DB_HOST = 'localhost';
@@ -28,7 +28,7 @@ class Db
     }
 
     /** `Getter` db. */
-    protected static function getDb(): PDO
+    protected static function DB(): PDO
     {
         try {
            $db = new PDO(

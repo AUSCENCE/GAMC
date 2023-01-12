@@ -4,7 +4,7 @@ namespace Gamc\Models;
 use PDO;
 use PDOException;
 
-class ModelArrondissement extends arrondissementManager
+class ModelProfession extends ProfessionManager
 {
     public int $id;
     public string $libelle;
@@ -40,7 +40,7 @@ class ModelArrondissement extends arrondissementManager
     {
         try {
 
-            $query =parent::DB()->prepare("INSERT INTO arrondissement (libelle) VALUE ( :libelle ) ");
+            $query = parent::DB()->prepare("INSERT INTO profession (libelle) VALUE ( :libelle ) ");
             $query->bindValue(':libelle', $this->libelle);
             $query->execute();
             $query->fetch(PDO::FETCH_ASSOC);
@@ -55,7 +55,7 @@ class ModelArrondissement extends arrondissementManager
     {
         try {
             
-            $query =parent::DB()->prepare("UPDATE arrondissement SET  libelle = :libelle  WHERE id = :id "); 
+            $query =parent::DB()->prepare("UPDATE profession SET  libelle = :libelle  WHERE id = :id "); 
             $query->bindValue(':id', $this->id);
             $query->bindValue(':libelle', $this->libelle);
             $query->execute();
@@ -69,7 +69,7 @@ class ModelArrondissement extends arrondissementManager
     public function delete() {
           
         // préparation de la requête de suppression
-        $query =parent::DB()->prepare('DELETE FROM arrondissement WHERE id = :id');
+        $query =parent::DB()->prepare('DELETE FROM profession WHERE id = :id');
       
         // liaison de l'identifiant de l'objet à la requête
         $query->bindValue(':id', $this->id);

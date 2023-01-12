@@ -2,19 +2,19 @@
  namespace Gamc\Controllers;
 
 use Gamc\Config\View;
-use Gamc\Models\ModelArrondissement;
+use Gamc\Models\ModelProfession;
 use Pecee\Http\Request;
 
 use function Gamc\Config\redirect;
 
-class arrondisementController 
+class ProfessionController 
 {
 
     public function index()
     { 
-        $arrondissements = ModelArrondissement::all();
+        $professions = ModelProfession::all();
        
-       return View::view('arrondissement.liste',["arrondissements"=>$arrondissements]);
+       return View::view('profession.liste',["professions"=>$professions]);
     }
 
     /**
@@ -29,20 +29,20 @@ class arrondisementController
            
             if ($_POST["libelle"] == "" || strlen($_POST["libelle"]) < 3) {
                 $_SESSION["error"] ="Le Champ libellé est vide ou le nombre de caractère es inférieur à 3";
-                return redirect('/arrondissement') ;    
+                return redirect('/profession') ;    
             }
-            $arrond = ModelArrondissement::is_exit(strtolower($_POST["libelle"]));
+            $arrond = ModelProfession::is_exit(strtolower($_POST["libelle"]));
             if ( is_null($arrond)) {
 
-                $arrondissement = new ModelArrondissement;
-                $arrondissement->libelle = $_POST["libelle"];
-                $arrondissement->save();
+                $profession = new ModelProfession;
+                $profession->libelle = $_POST["libelle"];
+                $profession->save();
                 $_SESSION["success"] ="Enrégistrement effectué avec success";
         
-                return redirect('/arrondissement') ;
+                return redirect('/profession') ;
             }else{
                 $_SESSION["error"] ="Le Champ libellé est vide ou le nombre de caractère es inférieur à 3";
-                return redirect('/arrondissement') ;
+                return redirect('/profession') ;
             }
 
         } catch (\Throwable $e) {
@@ -59,19 +59,19 @@ class arrondisementController
             if ($_POST["libelle"] == "" || strlen($_POST["libelle"]) < 3) {
                 $_SESSION["error"] ="Le Champ libellé est vide ou le nombre de caractère es inférieur à 3";
                 
-                return  redirect('/arrondissement') ;    
+                return  redirect('/profession') ;    
             }
            
-            $arrondissement = ModelArrondissement::find($_POST["id"]);
+            $profession = ModelProfession::find($_POST["id"]);
            
-            if (is_array( $arrondissement)) {
-                $arrond = new ModelArrondissement;
+            if (is_array( $profession)) {
+                $arrond = new ModelProfession;
                 $arrond->id = $_POST["id"];
                 $arrond->libelle = $_POST["libelle"];
                 $arrond->update(); 
                 $_SESSION["success"] ="Enrégistrement effectué avec success";
                 
-                return redirect('/arrondissement') ;
+                return redirect('/profession') ;
             }
             
 
@@ -90,18 +90,18 @@ class arrondisementController
             if ($_POST["id"] == "") {
                 $_SESSION["error"] ="Le Champ libellé est vide ou le nombre de caractère es inférieur à 3";
                 
-                return  redirect('/arrondissement') ;    
+                return  redirect('/profession') ;    
             }
            
-            $arrondissement = ModelArrondissement::find($_POST["id"]);
+            $profession = ModelProfession::find($_POST["id"]);
             
-            if (is_array( $arrondissement)) {
-                $arrond = new ModelArrondissement;
+            if (is_array( $profession)) {
+                $arrond = new ModelProfession;
                 $arrond->id = $_POST["id"];
                 $arrond->delete(); 
                 $_SESSION["success"] ="Enrégistrement effectué avec success";
                 
-                return redirect('/arrondissement') ;
+                return redirect('/profession') ;
             }
             
 
