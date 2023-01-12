@@ -11,7 +11,7 @@ class ChefarrondissementManager extends DB
     {
       try {
 
-        $query = parent::getDb()->prepare(
+        $query = parent::DB()->prepare(
         " SELECT  chefarrondissement.id,nom,prenom,anneedebut,anneefin,id_arrondissement, libelle 
             FROM  chefarrondissement, arrondissement 
             WHERE chefarrondissement.id_arrondissement = arrondissement.id
@@ -28,7 +28,7 @@ class ChefarrondissementManager extends DB
     {
       try {
 
-        $query = parent::getDb()->prepare(
+        $query = parent::DB()->prepare(
         " SELECT  chefarrondissement.id,nom,prenom,anneedebut,anneefin,id_arrondissement, libelle 
             FROM  chefarrondissement, arrondissement 
             WHERE chefarrondissement.id_arrondissement = arrondissement.id
@@ -49,7 +49,7 @@ class ChefarrondissementManager extends DB
       //var_dump($anneedebut, $id_arrond);die;
       try {
 
-        $query = parent::getDb()->prepare(
+        $query = parent::DB()->prepare(
         " SELECT  chefarrondissement.id,nom,prenom,anneedebut,anneefin,id_arrondissement, libelle 
             FROM  chefarrondissement, arrondissement 
             WHERE chefarrondissement.id_arrondissement = arrondissement.id

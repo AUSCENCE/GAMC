@@ -15,7 +15,7 @@ class NaissanceManager extends DB
   static function all(): array
   {
     try {
-      $traiment = parent::getDb()->prepare("SELECT * FROM actenaissance, personne, profession, ");
+      $traiment = parent::DB()->prepare("SELECT * FROM actenaissance, personne, profession, ");
       $traiment->execute();
     } catch (PDOException $e) {
         echo $e->getMessage();   

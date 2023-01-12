@@ -28,7 +28,7 @@ class DB
     }
 
     /** `Getter` db. */
-    protected static function getDb(): PDO
+    protected static function DB(): PDO
     {
         try {
            $db = new PDO(

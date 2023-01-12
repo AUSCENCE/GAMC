@@ -40,7 +40,7 @@ class ModelProfession extends ProfessionManager
     {
         try {
 
-            $query = parent::getDb()->prepare("INSERT INTO profession (libelle) VALUE ( :libelle ) ");
+            $query = parent::DB()->prepare("INSERT INTO profession (libelle) VALUE ( :libelle ) ");
             $query->bindValue(':libelle', $this->libelle);
             $query->execute();
             $query->fetch(PDO::FETCH_ASSOC);
@@ -55,7 +55,7 @@ class ModelProfession extends ProfessionManager
     {
         try {
             
-            $query =parent::getDb()->prepare("UPDATE profession SET  libelle = :libelle  WHERE id = :id "); 
+            $query =parent::DB()->prepare("UPDATE profession SET  libelle = :libelle  WHERE id = :id "); 
             $query->bindValue(':id', $this->id);
             $query->bindValue(':libelle', $this->libelle);
             $query->execute();
@@ -69,7 +69,7 @@ class ModelProfession extends ProfessionManager
     public function delete() {
           
         // préparation de la requête de suppression
-        $query =parent::getDb()->prepare('DELETE FROM profession WHERE id = :id');
+        $query =parent::DB()->prepare('DELETE FROM profession WHERE id = :id');
       
         // liaison de l'identifiant de l'objet à la requête
         $query->bindValue(':id', $this->id);

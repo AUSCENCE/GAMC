@@ -52,7 +52,7 @@ Class ModelChefarrondissement extends ChefarrondissementManager
     {
         try {
 
-            $query =parent::getDb()->prepare("INSERT INTO chefarrondissement (nom,prenom,anneedebut,anneefin,id_arrondissement)  VALUE (:nom, :prenom, :anneedebut, :anneefin, :id_arrondissement) ");
+            $query =parent::DB()->prepare("INSERT INTO chefarrondissement (nom,prenom,anneedebut,anneefin,id_arrondissement)  VALUE (:nom, :prenom, :anneedebut, :anneefin, :id_arrondissement) ");
             $query->bindValue(':nom', $this->nom);
             $query->bindValue(':prenom', $this->prenom);
             $query->bindValue(':anneedebut', $this->anneedebut);
@@ -71,7 +71,7 @@ Class ModelChefarrondissement extends ChefarrondissementManager
     public  function update()
     {
         try {
-            $query = parent::getDb()->prepare("UPDATE chefarrondissement  
+            $query = parent::DB()->prepare("UPDATE chefarrondissement  
                 SET 
                     nom = :nom,
                     prenom = :prenom, 
@@ -97,7 +97,7 @@ Class ModelChefarrondissement extends ChefarrondissementManager
     public function delete() {
           
         // préparation de la requête de suppression
-        $query =parent::getDb()->prepare('DELETE FROM chefarrondissement     WHERE id = :id');
+        $query =parent::DB()->prepare('DELETE FROM chefarrondissement     WHERE id = :id');
       
         // liaison de l'identifiant de l'objet à la requête
         $query->bindValue(':id', $this->id);

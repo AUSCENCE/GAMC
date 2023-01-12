@@ -13,7 +13,7 @@ use PDOException;
     {
       try {
 
-        $query = parent::getDb()->prepare("SELECT * FROM arrondissement");
+        $query = parent::DB()->prepare("SELECT * FROM arrondissement");
         $query->execute();
         $arrondissements = $query->fetchAll(PDO::FETCH_ASSOC);
         return $arrondissements;
@@ -29,7 +29,7 @@ use PDOException;
     {
       try {
 
-        $query = parent::getDb()->prepare("SELECT * FROM arrondissement WHERE  id  = :id");
+        $query = parent::DB()->prepare("SELECT * FROM arrondissement WHERE  id  = :id");
         $query->bindValue(":id", $id);
         $query->execute();
         $arrondissement = $query->fetch(PDO::FETCH_ASSOC);
@@ -45,7 +45,7 @@ use PDOException;
     {
       try {
 
-        $query = parent::getDb()->prepare("SELECT * FROM arrondissement WHERE  libelle  = :libelle");
+        $query = parent::DB()->prepare("SELECT * FROM arrondissement WHERE  libelle  = :libelle");
         $query->bindValue(":libelle", $libelle);
         $query->execute();
         $arrondissement = $query->fetch(PDO::FETCH_ASSOC);

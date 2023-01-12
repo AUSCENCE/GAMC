@@ -114,7 +114,7 @@ class ModelNaissance extends  NaissanceManager
      public function save() {
        
         // préparation de la requête d'insertion
-        $query =parent::getDb()->prepare('INSERT INTO actenaissance 
+        $query =parent::DB()->prepare('INSERT INTO actenaissance 
         id_titulaire, id_pere, id_mere, id_declarant,id_arrondissement,lieunaissance,datedeclaration,codeqr,id_professionpere,id_professionmere
         VALUES  :id_titulaire, :id_pere, :id_mere, :id_declarant, :id_arrondissement, :lieunaissance, :datedeclaration, :codeqr, :id_professionpere, :id_professionmere');
     
@@ -138,7 +138,7 @@ class ModelNaissance extends  NaissanceManager
     public function update() {
               
         // préparation de la requête de mise à jour
-        $query =parent::getDb()->prepare('UPDATE actenaissance 
+        $query =parent::DB()->prepare('UPDATE actenaissance 
         SET id_titulaire = :id_titulaire,
             id_pere = :id_pere, 
             id_mere = :id_mere, 
@@ -172,7 +172,7 @@ class ModelNaissance extends  NaissanceManager
     public function delete() {
           
         // préparation de la requête de suppression
-        $query =parent::getDb()->prepare('DELETE FROM actenaissance WHERE id = :id');
+        $query =parent::DB()->prepare('DELETE FROM actenaissance WHERE id = :id');
       
         // liaison de l'identifiant de l'objet à la requête
         $query->bindValue(':id', $this->id);

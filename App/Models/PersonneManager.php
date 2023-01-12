@@ -13,7 +13,7 @@ use PDOException;
     {
       try {
 
-        $query = parent::getDb()->prepare("SELECT * FROM personne");
+        $query = parent::DB()->prepare("SELECT * FROM personne");
         $query->execute();
         $personnes = $query->fetchAll(PDO::FETCH_ASSOC);
         return $personnes;
@@ -29,7 +29,7 @@ use PDOException;
     {
       try {
 
-        $query = parent::getDb()->prepare("SELECT * FROM personne WHERE  id  = :id");
+        $query = parent::DB()->prepare("SELECT * FROM personne WHERE  id  = :id");
         $query->bindValue(":id", $id);
         $query->execute();
         $personne = $query->fetch(PDO::FETCH_ASSOC);
@@ -45,7 +45,7 @@ use PDOException;
     {
       try {
 
-        $query = parent::getDb()->prepare("SELECT * FROM personne WHERE  libelle  = :libelle");
+        $query = parent::DB()->prepare("SELECT * FROM personne WHERE  libelle  = :libelle");
         $query->bindValue(":libelle", $libelle);
         $query->execute();
         $personne = $query->fetch(PDO::FETCH_ASSOC);
