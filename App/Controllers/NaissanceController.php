@@ -17,8 +17,8 @@ use Gamc\Models\Naissance;
      */ 
     public function index()
     {       
-        $naissances = ModelNaissance::all();     
-        return  View::view('ActeNaissance.Liste', $naissances);      
+       // $naissances = ModelNaissance::all();     
+        //return  View::view('ActeNaissance.Liste', $naissances);      
     }
 
     /**
@@ -52,7 +52,7 @@ use Gamc\Models\Naissance;
      */
     public function store()
     {        
-      var_dump($_POST);
+      var_dump($_POST); die;
         $naissance = new ModelNaissance;
         $naissance->id_titulaire = 1;
         $naissance->id_pere = 1;

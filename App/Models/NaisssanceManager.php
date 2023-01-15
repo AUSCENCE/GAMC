@@ -13,10 +13,14 @@ class NaissanceManager extends DB
    * @return array
    * 
    */
-  public static function all()
+  public static function all($id_arrondissement)
   {
     try {
-      $query = parent::DB()->prepare("SELECT * FROM actenaissance, personne WHERE actenaissance.id_titulaire = personne.id ");
+      $query = parent::DB()->prepare("SELECT * FROM actenaissance, personne 
+        WHERE actenaissance.id_titulaire = personne.id
+        AND actenaissance.id_arrondissement = :id_arrondissement 
+        ");
+      $query->bindValue('id_arrondissement', $id_arrondissement);
       $query->execute();
        $naissances =$query->fetchAll(PDO::FETCH_ASSOC);
       return  $naissances;

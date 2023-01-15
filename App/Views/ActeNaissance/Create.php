@@ -67,8 +67,8 @@ use function Gamc\Config\url;
                         <?php } ?> 
                         
                         
-                        <form action="<?=  url('naissance.store'); ?>">
-                        <input type="hidden" name="_method" value="POST" />                                
+                        <form action="<?=  url('naissance.store'); ?>" method="post">
+                            <input type="hidden" name="_method" value="POST" />                                
                             <p>
                             Je soussigné (e) :  <b>Abou Brock</b> <br>
                             Fonction : Chef de l'arrondissement de <b>COTONOU 1</b><br> 
@@ -155,7 +155,7 @@ use function Gamc\Config\url;
 
                             </p>
                             <div class="text-center">
-                                 <button type="submit" class="btn-success ">Enrégistrer</button>
+                                 <button id="submit" type="submit" class="btn-success ">Enrégistrer</button>
                             </div>                          
                         </form>                     
                     </div>
@@ -195,85 +195,135 @@ use function Gamc\Config\url;
         
         <!-- <script src="<?php View::asset('Js/pagination.js') ?>"></script>
  -->
-        <script> 
-            sessionStorage.setItem("nom", "valeur");                       
+        <script>                                            
+             
+            // Gestion des recherche 
+            const searchP = document.getElementById('searchP'); 
+            const searchM = document.getElementById('searchM'); 
+            const declarant = document.getElementById('declarant'); 
+            const personnes = <?= json_encode($personnes); ?>;
+            const pere =  document.getElementById('pere');
+            const agepere = document.getElementById('agepere');
+            const decl = document.getElementById('decl');
+            const mere = document.getElementById('mere');
+            const agemere = document.getElementById('agemere');
+            const prenom = document.getElementById('prenom');
+            const sexe = document.getElementById('sexe');
+            const submit = document.getElementById('submit');
+
+            if (sessionStorage.getItem('prenom')) {
+                prenom.value = sessionStorage.getItem('prenom')
+            }
+            if (sessionStorage.getItem('sexe')) {
+                sexe.value = sessionStorage.getItem('sexe')
+            }
+            if (sessionStorage.getItem('pere')) {
+                pere.innerHTML = sessionStorage.getItem("pere");
+                agepere.innerHTML = sessionStorage.getItem("agepere");
+                searchP.style.display ='none';
+                searchP.value = sessionStorage.getItem("searchP");
+                document.getElementById('btn1').style.display = 'none';
+            }            
+            if (sessionStorage.getItem('mere')) {
+                mere.innerHTML = sessionStorage.getItem("mere");
+                agemere.innerHTML = sessionStorage.getItem("agemere");
+                searchM.style.display ='none';
+                searchM.value = sessionStorage.getItem("searchM");
+                document.getElementById('btn2').style.display = 'none';
+            }
+            if (sessionStorage.getItem('declarant')) {
+                decl.innerHTML = sessionStorage.getItem("decl");
+                declarant.value = sessionStorage.getItem("declarant");
+                declarant.style.display ='none';
+                document.getElementById('btn3').style.display = 'none';
+            }
+            
+
                 // Récupère l'élément du modal 1
-                var modal1 = document.getElementById("myModal1");
-                // Récupère l'élément qui ouvre le modal 1
-                var btn1 = document.getElementById("myBtn1");
-
-                // Récupère l'élément qui ferme le modal 1
-                var span1 = document.getElementsByClassName("close")[0];
-
-                // Quand l'utilisateur clique sur le bouton 1, ouvre le modal 1
-                document.querySelectorAll("#btn1, #btn2, #btn3").forEach(function(bouton) {
-                bouton.addEventListener("click", function() {
-                    modal1.style.display = "block";
-                  
+                    var modal1 = document.getElementById("myModal1");
+                    // Récupère l'élément qui ouvre le modal 1
+                    var btn1 = document.getElementById("myBtn1");
+                    // Récupère l'élément qui ferme le modal 1
+                    var span1 = document.getElementsByClassName("close")[0];
+                    // Quand l'utilisateur clique sur le bouton 1, ouvre le modal 1
+                    document.querySelectorAll("#btn1, #btn2, #btn3").forEach(function(bouton) {
+                    bouton.addEventListener("click", function() {
+                        modal1.style.display = "block";
+                    
+                        });
                     });
-                });
-
-                // Quand l'utilisateur clique sur le bouton de fermeture 1, ferme le modal 1
-                span1.onclick = function() {
-                modal1.style.display = "none";
-                }
-
-
-                // Quand l'utilisateur clique n'importe où en dehors du modal 1, ferme le modal 1
-                window.onclick = function(event) {
-                    if (event.target == modal1) {
-                        modal1.style.display = "none";
+                    // Quand l'utilisateur clique sur le bouton de fermeture 1, ferme le modal 1
+                    span1.onclick = function() {
+                    modal1.style.display = "none";
                     }
-                }
-                // Gestion des recherche 
-               const searchP = document.getElementById('searchP'); 
-               const searchM = document.getElementById('searchM'); 
-               const declarant = document.getElementById('declarant'); 
-               const personnes = <?= json_encode($personnes); ?>;
-
+                    // Quand l'utilisateur clique n'importe où en dehors du modal 1, ferme le modal 1
+                    window.onclick = function(event) {
+                        if (event.target == modal1) {
+                            modal1.style.display = "none";
+                        }
+                    }     
                //pere
                searchP.onchange = ()=>{
                     const resultats = personnes.filter(personne => personne.codeqr == searchP.value);
                     resultats.forEach(personne => {
-                        document.getElementById('pere').innerHTML = personne.nom+' '+personne.prenom+'   ';
-                        let jour = new Date();
-                        let datenais = new Date(personne.datenaissance);                          
-                        document.getElementById('agepere').innerHTML = Math.floor((jour - datenais)/31536000000) +' ans' ;
-                        searchP.value = personne.id;
-                    
+                            pere.innerHTML = personne.nom+' '+personne.prenom+'   ';
+                             sessionStorage.setItem("pere", pere.innerHTML); 
+                             sessionStorage.setItem("searchP", personne.id);                       
+                            let jour = new Date();
+                            let datenais = new Date(personne.datenaissance);                          
+                            agepere.innerHTML = Math.floor((jour - datenais)/31536000000) +' ans' ;
+                            sessionStorage.setItem("agepere",agepere.innerHTML);                       
+                            searchP.value = personne.id;
                     });
                     searchP.style.display ='none';
                     document.getElementById('btn1').style.display = 'none';
-               } ;  
-               
+               } ;             
                //Mere
                searchM.onchange = ()=>{
                     const resultats = personnes.filter(personne => personne.codeqr == searchM.value);
                     resultats.forEach(personne => {
-                        document.getElementById('mere').innerHTML = personne.nom+' '+personne.prenom+'   ';
+                        mere.innerHTML = personne.nom+' '+personne.prenom+'   ';
+                        sessionStorage.setItem("mere", mere.innerHTML);
+                        sessionStorage.setItem("searchM", personne.id); 
                         let jour = new Date();
                         let datenais = new Date(personne.datenaissance);                          
-                        document.getElementById('agemere').innerHTML = Math.floor((jour - datenais)/31536000000) +' ans' ;
+                        agemere.innerHTML = Math.floor((jour - datenais)/31536000000) +' ans' ;
+                        sessionStorage.setItem("agemere",  agemere.innerHTML); 
                         searchM.value = personne.id;
-                    
                     });
                     searchM.style.display ='none';
                     document.getElementById('btn2').style.display = 'none';
-                    console.log(searchP.value);
                } ; 
-
                //declarant
                declarant.onchange = ()=>{
                     const resultats = personnes.filter(personne => personne.codeqr == declarant.value);
                     resultats.forEach(personne => {
-                        document.getElementById('decl').innerHTML = personne.nom+' '+personne.prenom+'   ';
+                        decl.innerHTML = personne.nom+' '+personne.prenom+'   ';
                         declarant.value = personne.id;
+                        sessionStorage.setItem("decl",decl.innerHTML);               
+                        sessionStorage.setItem("declarant", personne.id);
                     });
                     declarant.style.display ='none';
-                    document.getElementById('btn3').style.display = 'none';
-                   
-               } ;     
-
+                    document.getElementById('btn3').style.display = 'none'; 
+               } ;  
+               prenom.onchange = ()=>{
+                    sessionStorage.setItem("prenom", prenom.value); 
+               }  
+               sexe.onchange = ()=>{
+                    sessionStorage.setItem("sexe", sexe.value); 
+               }   
+               submit.onsubmit = ()=>{
+                    sessionStorage.removeItem("prenom");
+                    sessionStorage.removeItem("sexe");
+                    sessionStorage.removeItem("pere");
+                    sessionStorage.removeItem("agepere");
+                    sessionStorage.removeItem("searchP");
+                    sessionStorage.removeItem("mere");
+                    sessionStorage.removeItem("agemere");
+                    sessionStorage.removeItem("searchM");
+                    sessionStorage.removeItem("declarant");
+                    sessionStorage.removeItem("decl");
+               }
     
         </script>
                 
