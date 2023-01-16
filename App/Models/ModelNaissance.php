@@ -1,7 +1,6 @@
 <?php 
 namespace Gamc\Models;
 
-use DateTime;
 use PDO;
 
 class ModelNaissance extends  NaissanceManager
