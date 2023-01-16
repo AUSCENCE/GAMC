@@ -25,15 +25,38 @@ use PDOException;
       
     }
 
-    public static function find($id): array
+    public static function find($id ): array
     {
       try {
 
-        $query = parent::DB()->prepare("SELECT * FROM personne WHERE  id  = :id");
-        $query->bindValue(":id", $id);
-        $query->execute();
-        $personne = $query->fetch(PDO::FETCH_ASSOC);
-        return $personne;
+       
+          $query = parent::DB()->prepare("SELECT * FROM personne WHERE  id  = :id");
+          $query->bindValue(":id", $id);
+          $query->execute();
+          $personne = $query->fetch(PDO::FETCH_ASSOC);
+          return $personne;
+      
+
+       
+
+      } catch (PDOException $e) {
+          echo $e->getMessage("<strong>Error Fatal SQL :</strong> Veuillez Contacter le service Informatique.");   
+      }
+  
+      
+    }
+    public static function nee( $codeqr ): array
+    {
+      try {       
+       
+          $query = parent::DB()->prepare("SELECT * FROM personne WHERE  codeqr  = :codeqr");
+          $query->bindValue(":codeqr", $codeqr);
+          $query->execute();
+          $personne = $query->fetch(PDO::FETCH_ASSOC);
+          return $personne;
+      
+
+       
 
       } catch (PDOException $e) {
           echo $e->getMessage("<strong>Error Fatal SQL :</strong> Veuillez Contacter le service Informatique.");   

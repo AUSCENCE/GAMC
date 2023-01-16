@@ -141,9 +141,9 @@ use function Gamc\Config\url;
                                         </td>
                                     </tr>
                                 </table>
-                                Date de naissance : <input class="form-control" type="date" name="declarent" value="" max="<?= date('Y-m-j') ?>"> <br>
-                                Lieu de naissance : <input class="form-control" type="text" name="declarent" value=""><br>
-                                Date de la déclaration : <input class="form-control" type="date" name="declarent" max="<?= date('Y-m-j') ?>" value=""> <br>
+                                Date de naissance : <input class="form-control" type="date" name="datenaissance" value="" max="<?= date('Y-m-j') ?>"> <br>
+                                Lieu de naissance : <input class="form-control" type="text" name="lieunaissance" value=""><br>
+                                Date de la déclaration : <input class="form-control" type="date" name="datedeclaration" max="<?= date('Y-m-j') ?>" value=""> <br>
                                 <div class="text-center">
                                     Fait à <b>Cotonou</b> le <?= date('Y-m-j') ?>
                                 </div><br>
@@ -312,7 +312,7 @@ use function Gamc\Config\url;
                sexe.onchange = ()=>{
                     sessionStorage.setItem("sexe", sexe.value); 
                }   
-               submit.onsubmit = ()=>{
+               submit.onclick = ()=>{
                     sessionStorage.removeItem("prenom");
                     sessionStorage.removeItem("sexe");
                     sessionStorage.removeItem("pere");

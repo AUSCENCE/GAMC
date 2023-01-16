@@ -6,6 +6,7 @@ use Gamc\Models\ModelNaissance;
 use Gamc\Models\ModelPersonne;
 use Gamc\Models\ModelProfession;
 use Gamc\Models\Naissance;
+use Gamc\Models\NaissanceManager;
 
  class NaissanceController extends Controller
  {
@@ -51,19 +52,41 @@ use Gamc\Models\Naissance;
      * @return void
      */
     public function store()
-    {        
-      var_dump($_POST); die;
-        $naissance = new ModelNaissance;
-        $naissance->id_titulaire = 1;
-        $naissance->id_pere = 1;
-        $naissance->id_professionpere = 1;
-        $naissance->id_mere = 1;
-        $naissance->id_professionmere = 1;
-        $naissance->id_arrondissement = 1;
-        $naissance->id_declarant = 1;
-        $naissance->datedeclaration = '2023-01-06 15:20';
-        $naissance->save();
+    {   
+       
+           
+      try {
+        $pere = ModelPersonne::find(intval($_POST["searchP"]));
+        
+        $codeqr = random_int(10000,999999999);        
+        $personne = new ModelPersonne;
+        $personne->nom = $pere['nom'];
+        $personne->prenom = $_POST["prenom"];
+        $personne->sexe = $_POST["sexe"];
+        $personne->codeQR = $codeqr;
+        $personne->datenaissance = $_POST["datenaissance"];
+        $personne->save();
+        $nee = ModelPersonne::nee($codeqr);
 
+        $naissance = new ModelNaissance;
+        $naissance->id_titulaire =$nee['id'];
+        $naissance->id_pere = $_POST["searchP"];
+        $naissance->id_professionpere = $_POST["profpere"];
+        $naissance->id_mere =  $_POST["searchM"];
+        $naissance->id_professionmere = $_POST["profpere"];
+        $naissance->id_arrondissement = $_SESSION['user_id_arrond'];
+        $naissance->id_declarant = $_POST["declarant"];
+        $naissance->datedeclaration = $_POST["datedeclaration"];
+        $naissance->lieunaissance =  $_POST["lieunaissance"];
+        var_dump($naissance); die;
+
+        $naissance->save();
+        
+
+      } catch (\Throwable $e) {
+        echo $e->getMessage();
+      }
+        
     }
 
     public function update($id)

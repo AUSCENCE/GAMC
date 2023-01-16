@@ -45,7 +45,7 @@ class NaissanceManager extends DB
       ");
       $query->bindValue('id',$id);
       $query->execute();
-       $naissances =$query->fetchAll(PDO::FETCH_ASSOC);
+       $naissances = $query->fetchAll(PDO::FETCH_ASSOC);
       return  $naissances;
     
     } catch (\Throwable $th) {
