@@ -1,7 +1,7 @@
 <?php 
 namespace Gamc\Models;
 
-use DateTime;
+use PDO;
 
 class ModelNaissance extends  NaissanceManager
 {
@@ -132,6 +132,7 @@ class ModelNaissance extends  NaissanceManager
         
         // exécution de la requête
         $query->execute();
+        $query->fetchAll(PDO::FETCH_ASSOC);
     }
     
     // méthode pour modification l'acte de naissance dans la base de données

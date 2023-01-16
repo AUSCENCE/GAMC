@@ -36,18 +36,18 @@ use function Gamc\Config\url;
             <main>             
                 <div class=" content">
                      <div class="col-6"><h3>Listes des arrondissements</h3></div>
-                     <?php if (isset($_SESSION['error']) && $_SESSION['error'] != "1") { ?>
-                        <div id="error">
-                            <div  class="error"><?= $_SESSION['error'] ?> <span class="closes" onclick="fermererror()">&times;</span></div>
-                        </div>
+                        <?php if (isset($_SESSION['error']) && $_SESSION['error'] != "1") { ?>
+                            <div id="error">
+                                <div  class="error"><?= $_SESSION['error'] ?> <span class="closes" onclick="fermererror()">&times;</span></div>
+                            </div>
                            <?php $_SESSION['error'] = "1" ?>
-                    <?php }?>
-                    <?php if (isset($_SESSION['success']) && $_SESSION['success'] != "1") { ?>
-                        <div id="success">
-                           <div class="success"><?= $_SESSION['success'] ?><span class="closes" onclick="fermersuccess()">&times;</span></div>
-                        </div>
-                           <?php $_SESSION['success'] = "1" ?>
-                    <?php }?>                     
+                        <?php }?>
+                        <?php if (isset($_SESSION['success']) && $_SESSION['success'] != "1") { ?>
+                            <div id="success">
+                            <div class="success"><?= $_SESSION['success'] ?><span class="closes" onclick="fermersuccess()">&times;</span></div>
+                            </div>
+                            <?php $_SESSION['success'] = "1" ?>
+                        <?php }?>                     
                     <div class="right-title"> <button id="myBtn1" class="btn-primary">Ajouter</button></div>    
                     <div class="table-center"> 
                         <table id="myTable">

@@ -93,8 +93,7 @@ class ModelPersonne extends personneManager
         $query->bindValue(':codeqr', $this->codeQR);
         // exécution de la requête
         $query->execute();
-        $query->fetch(PDO::FETCH_ASSOC); 
-
+          
        } catch (\Throwable $e) {
         echo $e->getMessage();
        }
