@@ -3,7 +3,7 @@ namespace Gamc\Models;
 
 use PDO;
 
-class ModelNaissance extends  NaissanceManager
+class ModelNaissance extends NaissanceManager
 {
      public int $id;
      public int $id_titulaire;
