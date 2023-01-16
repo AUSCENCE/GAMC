@@ -115,8 +115,8 @@ class ModelNaissance extends NaissanceManager
        
         // préparation de la requête d'insertion
         $query =parent::DB()->prepare('INSERT INTO actenaissance 
-        id_titulaire, id_pere, id_mere, id_declarant,id_arrondissement,lieunaissance,datedeclaration,codeqr,id_professionpere,id_professionmere
-        VALUES  :id_titulaire, :id_pere, :id_mere, :id_declarant, :id_arrondissement, :lieunaissance, :datedeclaration, :codeqr, :id_professionpere, :id_professionmere');
+               ( id_titulaire, id_pere, id_mere, id_declarant, id_arrondissement, lieunaissance, datedeclaration, codeqr, id_professionpere, id_professionmere )
+        VALUES ( :id_titulaire, :id_pere, :id_mere, :id_declarant, :id_arrondissement, :lieunaissance, :datedeclaration, :codeqr, :id_professionpere, :id_professionmere )');
     
         // liaison des valeurs de l'objet à la requête
         $query->bindValue(':id_titulaire', $this->id_titulaire);
